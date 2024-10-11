@@ -14,7 +14,7 @@ const Button = styled.button`
 `;
 
 function App() {
-  return <Button>Click me</Button>;
+  return <Button>Click me!</Button>;
 }
 
 export default App;
