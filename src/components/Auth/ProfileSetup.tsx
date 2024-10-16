@@ -19,14 +19,7 @@ export interface ProfileSetupInterface {
   updateFormData: (field: string, value: string) => void;
 }
 
-const ProfileSetup = ({
-  steps,
-  nextClickHandler,
-  Funnel,
-  Step,
-  formData,
-  updateFormData,
-}: ProfileSetupInterface) => {
+const ProfileSetup = ({ steps, nextClickHandler, Funnel, Step, formData, updateFormData }: ProfileSetupInterface) => {
   return (
     <Funnel>
       <Step name="이름 입력">

@@ -3,10 +3,12 @@ import ProfileSetup from '@components/Auth/ProfileSetup';
 import GenericForm from '@components/GenericForm';
 import { useFunnel } from '@hooks/useFunnel';
 
+//ANCHOR - Funnel & Step setup
 const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력'];
 
+//ANCHOR - FORM 데이터 유저 정보
+
 const SignUpPage = () => {
-  //ANCHOR - FORM 데이터 유저 정보
   const [formData, setFormData] = useState({
     name: '',
     koreanId: '',
@@ -19,11 +21,12 @@ const SignUpPage = () => {
   const updateFormData = useCallback((field: string, value: string) => {
     setFormData((prevData) => {
       const newData = { ...prevData, [field]: value };
-      console.log('Updated form data:', newData); // 디버깅을 위한 로그
+      console.log('Updated form data:', newData); // 디버깅을 위한 로그 '<>'
       return newData;
     });
   }, []);
 
+  //TODO - 로그인 로직 추가
   const submitSignup = useCallback(() => {
     console.log('Submitting signup data:', formData);
   }, [formData]);
