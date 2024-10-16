@@ -1,3 +1,5 @@
+//NOTE - 우중 작업물
+
 import React, { useState, useEffect } from 'react';
 
 interface SetupNameProps {

@@ -1,3 +1,5 @@
+//NOTE - 우중 작업물
+
 import React from 'react';
 import { FunnelProps, StepProps } from '@hooks/useFunnel';
 import SetupName from './SetupName';

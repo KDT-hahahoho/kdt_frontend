@@ -1,3 +1,5 @@
+//NOTE - 우중 작업물
+
 import React, { useState, useCallback } from 'react';
 import ProfileSetup from '@components/Auth/ProfileSetup';
 import GenericForm from '@components/GenericForm';
@@ -7,7 +9,6 @@ import { useFunnel } from '@hooks/useFunnel';
 const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력'];
 
 //ANCHOR - FORM 데이터 유저 정보
-
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
     name: '',
