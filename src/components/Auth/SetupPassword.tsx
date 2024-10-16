@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface SetupPasswordProps {
   onNext: () => void;
+  value: string;
+  onChange: (value: string) => void;
 }
 
-const SetupPassword: React.FC<SetupPasswordProps> = ({ onNext }) => {
+const SetupPassword: React.FC<SetupPasswordProps> = ({ onNext, value, onChange }) => {
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    setPassword(value);
+  }, [value]);
 
   const handleNext = () => {
     // 비밀번호 설정 로직
+    onChange(password);
     onNext();
   };
 
