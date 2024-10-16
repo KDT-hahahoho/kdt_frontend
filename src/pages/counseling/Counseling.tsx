@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import fetchGPT from '../hooks/useGPT';
+import fetchGPT from '../../hooks/useGPT';
 
 interface Message {
   sender?: string;
