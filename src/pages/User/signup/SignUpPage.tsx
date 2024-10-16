@@ -1,9 +1,9 @@
-import { useFunnel } from '@/hooks/useFunnel';
-import ProfileSetup from '../../../components/ForSignUp/ProfileSetup';
-import GenericForm from '@/components/GenericForm';
+import ProfileSetup from '@components/Auth/ProfileSetup';
+import GenericForm from '@components/GenericForm';
+import { useFunnel } from '@hooks/useFunnel';
 
 // 전체 스텝을 담은 배열
-const steps = ['이름 입력', '주민등록번호 입력', '이메일 인증', '비밀번호 설정'];
+const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력'];
 
 const SignUpPage = () => {
   const submitSignup = () => {

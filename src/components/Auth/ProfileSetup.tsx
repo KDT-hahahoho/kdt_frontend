@@ -1,8 +1,8 @@
-import SetupEmail from '@/components/ForSignUp/SetupEmail';
-import SetupKoreanIDInput from '@/components/ForSignUp/SetupKoreanIDInput';
-import SetupName from '@/components/ForSignUp/SetupName';
-import SetupPassword from '@/components/ForSignUp/SetupPassword';
-import { FunnelProps, StepProps } from '@/hooks/useFunnel';
+import { FunnelProps, StepProps } from '@hooks/useFunnel';
+import SetupName from './SetupName';
+import SetupKoreanIDInput from './SetupKoreanIDInput';
+import SetupEmail from './SetupEmail';
+import SetupPassword from './SetupPassword';
 
 export interface ProfileSetupInterface {
   steps: string[];
@@ -22,11 +22,11 @@ const ProfileSetup = ({ steps, nextClickHandler, Funnel, Step }: ProfileSetupInt
         <SetupKoreanIDInput onNext={() => nextClickHandler(steps[2])} />
       </Step>
 
-      <Step name="이메일 인증">
+      <Step name="이메일 입력">
         <SetupEmail onNext={() => nextClickHandler(steps[3])} />
       </Step>
 
-      <Step name="비밀번호 설정">
+      <Step name="비밀번호 입력">
         <SetupPassword onNext={() => nextClickHandler(steps[4])} />
       </Step>
     </Funnel>

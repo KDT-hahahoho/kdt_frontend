@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm, FormProvider, SubmitHandler, UseFormProps, FieldValues } from 'react-hook-form';
 
-// 제네릭 타입을 사용한 폼 interface 정의
 interface GenericFormInterface<TFormData extends FieldValues> {
   children: React.ReactNode;
   onSubmit: SubmitHandler<TFormData>;
