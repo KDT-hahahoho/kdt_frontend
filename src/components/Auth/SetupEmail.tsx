@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface SetupEmailProps {
   onNext: () => void;
+  value: string;
+  onChange: (value: string) => void;
 }
 
-const SetupEmail: React.FC<SetupEmailProps> = ({ onNext }) => {
+const SetupEmail: React.FC<SetupEmailProps> = ({ onNext, value, onChange }) => {
   const [email, setEmail] = useState('');
 
+  useEffect(() => {
+    setEmail(value);
+  }, [value]);
+
   const handleNext = () => {
-    // 이메일 인증 로직
+    onChange(email);
     onNext();
   };
 

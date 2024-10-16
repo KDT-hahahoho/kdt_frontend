@@ -18,20 +18,9 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true
 
     /* Add baseUrl and paths for aliases */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@store/*": ["src/zustand/*"],
-      "@styles/*": ["src/styles/*"],
-      "@features/*": ["src/features/*"]
-    }
   },
   "include": ["src"]
 }
