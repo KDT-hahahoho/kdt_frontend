@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import ProfileSetup from '@components/Auth/ProfileSetup';
-import GenericForm from '@components/GenericForm';
+import GenericForm from '@components/common/GenericForm';
 import { useFunnel } from '@hooks/useFunnel';
 
 //ANCHOR - Funnel & Step setup
@@ -44,16 +44,18 @@ const SignUpPage = () => {
   );
 
   return (
-    <GenericForm formOptions={{ mode: 'onChange' }} onSubmit={submitSignup}>
-      <ProfileSetup
-        steps={steps}
-        nextClickHandler={nextClickHandler}
-        Funnel={Funnel}
-        Step={Step}
-        formData={formData}
-        updateFormData={updateFormData}
-      />
-    </GenericForm>
+    <>
+      <GenericForm formOptions={{ mode: 'onChange' }} onSubmit={submitSignup}>
+        <ProfileSetup
+          steps={steps}
+          nextClickHandler={nextClickHandler}
+          Funnel={Funnel}
+          Step={Step}
+          formData={formData}
+          updateFormData={updateFormData}
+        />
+      </GenericForm>
+    </>
   );
 };
 

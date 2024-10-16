@@ -1,5 +1,7 @@
 //NOTE - 우중 작업물
 
+import Button from '@components/common/Button';
+import Input from '@components/common/Input';
 import React, { useState, useEffect } from 'react';
 
 interface SetupNameProps {
@@ -22,14 +24,15 @@ const SetupName: React.FC<SetupNameProps> = ({ onNext, value, onChange }) => {
 
   return (
     <div>
-      <h2>이름 입력</h2>
-      <input
+      <h2>이름을 작성해주세요</h2>
+      <Input
         type="text"
+        name="이름"
         value={name}
         onChange={(e) => setName(e.target.value)} // 입력 중에는 상태 업데이트
         placeholder="이름 입력"
       />
-      <button onClick={handleNext}>다음</button>
+      <Button onClick={handleNext} text="다음" type="submit" size="large"></Button>
     </div>
   );
 };
