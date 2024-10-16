@@ -1,3 +1,5 @@
+//NOTE - 우중 작업물
+
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
@@ -15,7 +17,7 @@ interface ButtonProps {
 const Button = ({
   text,
   variant = 'primary',
-  disabled = false,
+  disabled = true,
   type = 'button',
   onClick,
   size = 'large', // 기본 크기 설정

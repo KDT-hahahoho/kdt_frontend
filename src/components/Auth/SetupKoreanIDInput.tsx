@@ -1,5 +1,6 @@
-//NOTE - 우중 작업물
-
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import Button from '@components/common/Button';
 import React, { useState, useEffect } from 'react';
 
 interface SetupKoreanIDInputProps {
@@ -8,8 +9,14 @@ interface SetupKoreanIDInputProps {
   onChange: (value: string) => void; // 상위 컴포넌트에 전달할 콜백
 }
 
+interface IdNumber {
+  firstPart: string;
+  secondPart: string;
+}
+
 const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, onChange }) => {
-  const [idNumber, setIdNumber] = useState({ firstPart: '', secondPart: '' });
+  const [idNumber, setIdNumber] = useState<IdNumber>({ firstPart: '', secondPart: '' });
+  const [isValid, setIsValid] = useState(false);
 
   // value prop이 변경될 때 local state를 업데이트
   useEffect(() => {
@@ -20,13 +27,23 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
     });
   }, [value]);
 
+  useEffect(() => {
+    validateIdNumber();
+  }, [idNumber]);
+
+  const validateIdNumber = () => {
+    const isFirstPartValid = idNumber.firstPart.length === 6 && /^\d+$/.test(idNumber.firstPart); // 6자리 숫자
+    const isSecondPartValid = idNumber.secondPart.length === 1 && /^\d$/.test(idNumber.secondPart); // 1자리 숫자
+    setIsValid(isFirstPartValid && isSecondPartValid);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setIdNumber((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleNext = () => {
-    if (idNumber.firstPart.length === 6 && idNumber.secondPart.length === 1) {
+    if (isValid) {
       const newIdNumber = `${idNumber.firstPart}-${idNumber.secondPart}`;
       onChange(newIdNumber); // 상위 컴포넌트로 주민등록번호 전달
       onNext(); // 다음 단계로 진행
@@ -36,11 +53,10 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
   };
 
   return (
-    <div>
-      <h2>주민등록번호 입력</h2>
-      <p>주민등록번호의 앞 6자리와 뒷 1자리를 입력해주세요.</p>
+    <div css={containerStyle}>
       <div>
         <input
+          css={inputStyle}
           type="text"
           name="firstPart"
           value={idNumber.firstPart}
@@ -50,6 +66,7 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
         />
         -
         <input
+          css={inputStyle}
           type="text"
           name="secondPart"
           value={idNumber.secondPart}
@@ -58,9 +75,29 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
           placeholder="뒤 1자리"
         />
       </div>
-      <button onClick={handleNext}>다음</button>
+      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
     </div>
   );
 };
+
+const containerStyle = css``;
+
+const inputStyle = css`
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px;
+  width: 100px;
+  font-size: 16px;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+`;
 
 export default SetupKoreanIDInput;

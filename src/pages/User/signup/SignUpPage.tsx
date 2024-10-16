@@ -4,6 +4,7 @@ import React, { useState, useCallback } from 'react';
 import ProfileSetup from '@components/Auth/ProfileSetup';
 import GenericForm from '@components/common/GenericForm';
 import { useFunnel } from '@hooks/useFunnel';
+import PageTitleHeader from '@components/Auth/PageTitleHeader';
 
 //ANCHOR - Funnel & Step setup
 const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력'];
@@ -17,7 +18,7 @@ const SignUpPage = () => {
     password: '',
   });
 
-  const { Funnel, Step, setStep } = useFunnel(steps[0]);
+  const { Funnel, Step, setStep, currentStep } = useFunnel(steps[0]);
 
   const updateFormData = useCallback((field: string, value: string) => {
     setFormData((prevData) => {
@@ -46,6 +47,7 @@ const SignUpPage = () => {
   return (
     <>
       <GenericForm formOptions={{ mode: 'onChange' }} onSubmit={submitSignup}>
+        <PageTitleHeader currentStep={currentStep} />
         <ProfileSetup
           steps={steps}
           nextClickHandler={nextClickHandler}
