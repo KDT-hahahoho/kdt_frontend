@@ -13,6 +13,7 @@ export default defineConfig({
       { find: '@store', replacement: '/src/zustand' },
       { find: '@styles', replacement: '/src/styles' },
       { find: '@features', replacement: '/src/features' },
+      { find: '@router', replacement: '/src/router' },
     ],
   },
 });
