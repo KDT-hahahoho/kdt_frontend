@@ -5,6 +5,7 @@ import ProfileSetup from '@components/Auth/ProfileSetup';
 import GenericForm from '@components/common/GenericForm';
 import { useFunnel } from '@hooks/useFunnel';
 import PageTitleHeader from '@components/Auth/PageTitleHeader';
+import Progressbar from '@components/Auth/Progressbar';
 
 //ANCHOR - Funnel & Step setup
 const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력'];
@@ -47,6 +48,7 @@ const SignUpPage = () => {
   return (
     <>
       <GenericForm formOptions={{ mode: 'onChange' }} onSubmit={submitSignup}>
+        <Progressbar />
         <PageTitleHeader currentStep={currentStep} />
         <ProfileSetup
           steps={steps}

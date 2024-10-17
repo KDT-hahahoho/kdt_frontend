@@ -14,9 +14,6 @@ const style = css`
 const Layout = () => {
   return (
     <div css={style}>
-      <header>
-        <h1>Header</h1>
-      </header>
       <Outlet />
       <footer>
         <h1>Footer</h1>

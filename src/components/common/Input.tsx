@@ -1,7 +1,10 @@
-//NOTE - 우중 작업물
-
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import invalidIcon from '@assets/Images/invalid.svg';
+import validIcon from '@assets/Images/valid.svg';
+import variables from '@styles/Variables';
+
+//TODO - 인풋 벨리데이션 수정 및 검토
 
 type InputStatus = 'default' | 'valid' | 'invalid';
 
@@ -15,63 +18,59 @@ interface InputProps {
   errorMessage?: string;
 }
 
-const Input = ({
-  type = 'text',
-  status = 'default',
-  placeholder,
-  value,
-  onChange,
-  errorMessage,
-  ...rest
-}: InputProps) => {
+const Input = ({ type = 'text', status = 'default', placeholder, value, onChange, ...rest }: InputProps) => {
+  /** 상태의 따른 이미지 랜더 함수 */
   const renderStatusImage = () => {
+    if (status === 'default') {
+      return;
+    }
     if (status === 'valid') {
-      return <img src="/icons/valid-icon.png" css={imageStyles} alt="Valid" />;
+      return <img src={validIcon} css={imageStyles} alt="Valid" />;
     }
     if (status === 'invalid') {
-      return <img src="/icons/invalid-icon.png" css={imageStyles} alt="Invalid" />;
+      return <img src={invalidIcon} css={imageStyles} alt="Invalid" />;
     }
     return null;
   };
 
   return (
-    <div>
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        css={inputStyles(status)}
-        {...rest}
-      />
-      {renderStatusImage()}
-
-      {errorMessage && (
-        <span
-          css={css`
-            color: red;
-            font-size: 12px;
-            margin-top: 4px;
-            display: block;
-          `}
-        >
-          {errorMessage}
-        </span>
-      )}
+    <div css={inputContainer}>
+      <div css={inputWrapper}>
+        <input
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          css={inputStyles(status)}
+          {...rest}
+        />
+        <div onClick={() => {}}>{renderStatusImage()}</div>
+      </div>
     </div>
   );
 };
 
 export default Input;
 
+const inputContainer = css`
+  display: flex;
+  flex-direction: column;
+`;
+
+const inputWrapper = css`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 36.8rem;
+`;
+
 const inputStyles = (status: InputStatus) => css`
-  all: unset;
-  font-size: 18px;
+  font-size: 1.8rem;
   border: 1px solid #ddd;
-  width: 368px;
-  height: 60px;
-  border-radius: 8px;
-  padding-left: 20px;
+  width: 100%;
+
+  border-radius: 0.8rem;
+  padding-left: 1rem;
   box-sizing: border-box;
 
   &::placeholder {
@@ -80,12 +79,16 @@ const inputStyles = (status: InputStatus) => css`
 
   &:focus {
     outline: none;
-    border-color: ${status === 'default' ? '#007bff' : ''};
+    background-color: ${status === 'invalid' ? '#FFEFEB' : ''};
+    border-color: ${status === 'invalid' ? `${variables.colors.secondary}` : ''};
   }
 `;
 
 const imageStyles = css`
-  width: 24px;
-  height: 24px;
-  margin-left: 8px;
+  position: absolute;
+  right: 1.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.4rem;
+  height: 2.4rem;
 `;

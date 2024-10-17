@@ -1,5 +1,3 @@
-//NOTE - 우중 작업물
-
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
@@ -26,28 +24,35 @@ const Button = ({
 
   const sizeStyles = {
     small: css`
-      padding: 8px 12px;
-      font-size: 14px;
+      padding: 0.8rem 1.2rem;
+      font-size: 1.4rem;
+      text-align: center;
+      box-sizing: border-box;
     `,
     medium: css`
-      width: 368px;
-      padding: 14px 20px;
-      font-size: 16px;
-      height: 46px;
+      width: 36.8rem; /* 368px */
+      padding: 1.4rem 2rem; /* 14px 20px */
+      font-size: 1.6rem; /* 16px */
+      height: 4.6rem; /* 46px */
+      text-align: center;
+      box-sizing: border-box;
     `,
     large: css`
-      width: 368px;
-      padding: 16px 24px;
-      font-size: 18px;
-      height: 56px;
+      width: 36.8rem; /* 368px */
+      padding: 1.6rem 2.4rem; /* 16px 24px */
+      font-size: 1.8rem; /* 18px */
+      height: 5.6rem; /* 56px */
+      text-align: center;
+      box-sizing: border-box;
     `,
   };
 
   const styles = css`
     border: none;
-    border-radius: 8px;
+    border-radius: 0.8rem; /* 8px */
     color: white;
     cursor: pointer;
+    margin-top: 50rem;
 
     ${sizeStyles[size]} // 선택한 크기 스타일 적용
 
@@ -70,7 +75,7 @@ const Button = ({
 
     ${disabled &&
     `
-      background-color: #c0c0c0;
+      background-color: #D9D9D9;
       cursor: not-allowed;
     `}
   `;

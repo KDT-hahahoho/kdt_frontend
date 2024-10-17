@@ -3,6 +3,12 @@ import { css } from '@emotion/react';
 import variables from './Variables';
 
 const GlobalStyles = css`
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 300;
+    src: url('../assets/fonts/PretendardVariable.woff2') format('woff2');
+  }
+
   :root {
     font-size: 10px; /* 1rem = 10px */
     width: 100vw;
@@ -14,7 +20,7 @@ const GlobalStyles = css`
   body {
     margin: unset;
     color: ${variables.colors.black};
-    font-family: var(--font-roboto), var(--font-noto), sans-serif;
+    font-family: 'Pretendard', sans-serif; /* Pretendard 폰트 적용 */
     font-size: ${variables.size.medium};
   }
 
@@ -101,7 +107,7 @@ const GlobalStyles = css`
     margin: unset;
     padding: unset;
     border: 0;
-    font-family: sans-serif;
+    font-family: 'Pretendard', sans-serif; /* Pretendard 폰트 적용 */
     font-size: inherit;
     font-weight: inherit;
     vertical-align: baseline;
@@ -110,6 +116,7 @@ const GlobalStyles = css`
     line-height: 1.4;
     word-break: keep-all;
   }
+
   article,
   aside,
   details,
@@ -123,14 +130,17 @@ const GlobalStyles = css`
   section {
     display: block;
   }
+
   ol,
   ul {
     list-style: none;
   }
+
   blockquote,
   q {
     quotes: none;
   }
+
   blockquote:before,
   blockquote:after,
   q:before,
@@ -138,6 +148,7 @@ const GlobalStyles = css`
     content: '';
     content: none;
   }
+
   table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -171,7 +182,7 @@ const GlobalStyles = css`
 
   select,
   input {
-    font-family: var(--font-roboto), var(--font-noto), 'sans-serif';
+    font-family: 'Pretendard', sans-serif; /* Pretendard 폰트 적용 */
     letter-spacing: -0.02em;
     box-sizing: border-box;
     padding: 0;
@@ -183,7 +194,7 @@ const GlobalStyles = css`
   input[type='password'],
   input[type='search'],
   input[type='tel'] {
-    height: 4.4rem;
+    height: 6rem;
     width: 100%;
     font-size: ${variables.size.medium};
     text-indent: ${variables.size.medium};
@@ -203,7 +214,6 @@ const GlobalStyles = css`
   input[type='email']:focus,
   input[type='password']:focus,
   input[type='tel']:focus {
-    border-color: ${variables.colors.primary};
     outline: 1px solid ${variables.colors.primary};
   }
 

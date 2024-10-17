@@ -62,32 +62,55 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
           value={idNumber.firstPart}
           onChange={handleInputChange}
           maxLength={6}
-          placeholder="앞 6자리"
+          placeholder="000616"
         />
         -
-        <input
-          css={inputStyle}
-          type="text"
-          name="secondPart"
-          value={idNumber.secondPart}
-          onChange={handleInputChange}
-          maxLength={1}
-          placeholder="뒤 1자리"
-        />
+        <div>
+          <input
+            css={inputStyleSmall}
+            type="text"
+            name="secondPart"
+            value={idNumber.secondPart}
+            onChange={handleInputChange}
+            maxLength={1}
+            placeholder="4"
+          />
+        </div>
       </div>
       <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
     </div>
   );
 };
 
-const containerStyle = css``;
+const containerStyle = css`
+  display: flex;
+  flex-direction: column;
+`;
 
 const inputStyle = css`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin: 5px;
-  width: 100px;
+  width: 170px;
+  font-size: 16px;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
+const inputStyleSmall = css`
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px;
+  width: 48px;
   font-size: 16px;
 
   &:focus {

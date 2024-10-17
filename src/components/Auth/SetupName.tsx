@@ -1,5 +1,3 @@
-//NOTE - 우중 작업물
-
 import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import React, { useState, useEffect, useDeferredValue } from 'react';
@@ -15,6 +13,7 @@ const SetupName: React.FC<SetupNameProps> = ({ onNext, value, onChange }) => {
   const deferredName = useDeferredValue(name);
   const [error, setError] = useState<string | null>(null);
   const [isValid, setIsValid] = useState(false);
+  const [isTouched, setIsTouched] = useState(false); // 입력 필드가 수정되었는지 여부를 추적
 
   useEffect(() => {
     setName(value);
@@ -22,14 +21,16 @@ const SetupName: React.FC<SetupNameProps> = ({ onNext, value, onChange }) => {
 
   // 유효성 검사 및 버튼 활성화 상태 업데이트
   useEffect(() => {
-    const isValidName = validateName(deferredName);
-    setIsValid(isValidName);
-  }, [deferredName]);
+    if (isTouched) {
+      const isValidName = validateName(deferredName);
+      setIsValid(isValidName);
+    }
+  }, [deferredName, isTouched]);
 
   const validateName = (name: string) => {
-    const regex = /^[가-힣]{3,}$/; // 한글만 허용하고 3글자 이상인 정규 표현식
+    const regex = /^[가-힣]{2,}$/; // 한글만 허용하고 2글자 이상인 정규 표현식
     if (!regex.test(name)) {
-      setError('이름은 한글로 3글자 이상 입력해야 합니다.'); // 에러 메시지 설정
+      setError('올바른 형식이 아닙니다.'); // 에러 메시지 설정
       return false;
     }
     setError(null); // 유효성 검사 통과
@@ -43,19 +44,33 @@ const SetupName: React.FC<SetupNameProps> = ({ onNext, value, onChange }) => {
     }
   };
 
+  const handleValidation = (error: string | null, value: string) => {
+    if (error) {
+      return 'invalid'; // 에러가 있을 경우 'invalid'
+    }
+    if (value.length === 0) {
+      return 'default'; // 입력값이 비어있을 경우 'default'
+    }
+    return 'valid'; // 그 외의 경우 'valid'
+  };
+
   return (
     <div>
-      <h2>이름을 기입해주세요.</h2>
       <Input
         type="text"
         name="이름"
         value={name}
-        onChange={(e) => setName(e.target.value)} // 입력 중에는 상태 업데이트
+        status={handleValidation(error, name)} // error와 name을 인자로 넘김
+        onChange={(e) => {
+          setName(e.target.value); // 입력 중에는 상태 업데이트
+          setIsTouched(true); // 필드가 수정되었음을 표시
+        }}
         placeholder="이름 입력"
       />
-      {error && (
-        <span style={{ color: 'red', fontSize: '12px' }}>{error}</span> // 에러 메시지 표시
-      )}
+      {isTouched &&
+        error && ( // 필드가 수정된 후에만 에러 메시지 표시
+          <div style={{ color: '#FFA997', fontSize: '14px', paddingLeft: '12px', paddingTop: '12px' }}>{error}</div>
+        )}
       <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
     </div>
   );
