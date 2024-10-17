@@ -5,8 +5,9 @@ import GenericForm from '@components/common/GenericForm';
 import { useFunnel } from '@hooks/useFunnel';
 import PageTitleHeader from '@components/Auth/PageTitleHeader';
 import SignupProgressBar from '@components/Auth/SignupProgressBar';
+import { determineGenderFromKoreanId } from '@utils/validation/handleValidation';
 
-const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력'];
+const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력', '약관동의'];
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -14,10 +15,12 @@ const SignUpPage = () => {
     koreanId: '',
     email: '',
     password: '',
+    gender: '',
   });
 
   const { Funnel, Step, setStep, currentStep } = useFunnel(steps[0]);
 
+  // 프로그레스바에 필요한 로직
   const totalSteps = steps.length;
   const currentStepIndex = steps.indexOf(currentStep);
   const progressPercentage = ((currentStepIndex + 1) / totalSteps) * 100;
@@ -25,6 +28,17 @@ const SignUpPage = () => {
   const updateFormData = useCallback((field: string, value: string) => {
     setFormData((prevData) => {
       const newData = { ...prevData, [field]: value };
+
+      if (field === 'koreanId') {
+        const gender = determineGenderFromKoreanId(value); // Gender 결정 함수 호출
+
+        if (gender) {
+          newData['gender'] = gender; // 유효한 성별이면 추가
+        } else {
+          return prevData; // 오류일 때는 기존 데이터를 반환하여 반려
+        }
+      }
+
       console.log('Updated form data:', newData);
       return newData;
     });
@@ -38,11 +52,9 @@ const SignUpPage = () => {
     (nextStep: string | null) => {
       if (nextStep) {
         setStep(nextStep);
-      } else {
-        submitSignup();
       }
     },
-    [setStep, submitSignup]
+    [setStep]
   );
 
   return (
@@ -57,6 +69,7 @@ const SignUpPage = () => {
           Step={Step}
           formData={formData}
           updateFormData={updateFormData}
+          submitSignup={submitSignup}
         />
       </GenericForm>
     </>

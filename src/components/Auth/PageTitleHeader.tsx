@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
+import variables from '@styles/Variables';
 
 interface PageTitleHeaderProps {
   currentStep: string;
@@ -38,6 +39,6 @@ const PageTitleHeader = ({ currentStep }: PageTitleHeaderProps) => {
 export default PageTitleHeader;
 
 const PageTitle = styled.h2`
-  font-size: 2.2rem;
+  font-size: ${variables.size.max};
   margin-bottom: 3.8rem;
 `;

@@ -7,6 +7,7 @@ import SetupName from './SetupName';
 import SetupKoreanIDInput from './SetupKoreanIDInput';
 import SetupEmail from './SetupEmail';
 import SetupPassword from './SetupPassword';
+import CheckAgreement from './CheckAgreement';
 
 export interface ProfileSetupInterface {
   steps: string[];
@@ -19,10 +20,19 @@ export interface ProfileSetupInterface {
     email: string;
     password: string;
   };
+  submitSignup?: () => void;
   updateFormData: (field: string, value: string) => void;
 }
 
-const ProfileSetup = ({ steps, nextClickHandler, Funnel, Step, formData, updateFormData }: ProfileSetupInterface) => {
+const ProfileSetup = ({
+  submitSignup,
+  steps,
+  nextClickHandler,
+  Funnel,
+  Step,
+  formData,
+  updateFormData,
+}: ProfileSetupInterface) => {
   return (
     <Funnel>
       <Step name="이름 입력">
@@ -51,10 +61,14 @@ const ProfileSetup = ({ steps, nextClickHandler, Funnel, Step, formData, updateF
 
       <Step name="비밀번호 입력">
         <SetupPassword
-          onNext={() => nextClickHandler(null)}
+          onNext={() => nextClickHandler(steps[4])}
           value={formData.password}
           onChange={(value) => updateFormData('password', value)}
         />
+      </Step>
+
+      <Step name="약관동의">
+        <CheckAgreement submitSignup={submitSignup} />
       </Step>
     </Funnel>
   );

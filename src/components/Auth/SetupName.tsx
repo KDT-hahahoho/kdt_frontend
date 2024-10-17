@@ -1,6 +1,8 @@
 import Button from '@components/common/Button';
 import Input from '@components/common/Input';
+import { handleValidation } from '@utils/validation/handleValidation';
 import React, { useState, useEffect, useDeferredValue } from 'react';
+import AuthError from './AuthError';
 
 interface SetupNameProps {
   onNext: () => void;
@@ -44,16 +46,6 @@ const SetupName: React.FC<SetupNameProps> = ({ onNext, value, onChange }) => {
     }
   };
 
-  const handleValidation = (error: string | null, value: string) => {
-    if (error) {
-      return 'invalid'; // 에러가 있을 경우 'invalid'
-    }
-    if (value.length === 0) {
-      return 'default'; // 입력값이 비어있을 경우 'default'
-    }
-    return 'valid'; // 그 외의 경우 'valid'
-  };
-
   return (
     <div>
       <Input
@@ -69,7 +61,7 @@ const SetupName: React.FC<SetupNameProps> = ({ onNext, value, onChange }) => {
       />
       {isTouched &&
         error && ( // 필드가 수정된 후에만 에러 메시지 표시
-          <div style={{ color: '#FFA997', fontSize: '14px', paddingLeft: '12px', paddingTop: '12px' }}>{error}</div>
+          <AuthError message={error} />
         )}
       <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
     </div>

@@ -2,6 +2,9 @@
 import { css } from '@emotion/react';
 import Button from '@components/common/Button';
 import React, { useState, useEffect } from 'react';
+import variables from '@styles/Variables';
+import styled from '@emotion/styled';
+import AuthError from './AuthError';
 
 interface SetupKoreanIDInputProps {
   onNext: () => void;
@@ -17,6 +20,7 @@ interface IdNumber {
 const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, onChange }) => {
   const [idNumber, setIdNumber] = useState<IdNumber>({ firstPart: '', secondPart: '' });
   const [isValid, setIsValid] = useState(false);
+  const [error, setError] = useState<string | null>(null); // 오류 메시지 상태 추가
 
   // value prop이 변경될 때 local state를 업데이트
   useEffect(() => {
@@ -31,10 +35,18 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
     validateIdNumber();
   }, [idNumber]);
 
+  /** 주민등록번호 검증  */
   const validateIdNumber = () => {
     const isFirstPartValid = idNumber.firstPart.length === 6 && /^\d+$/.test(idNumber.firstPart); // 6자리 숫자
-    const isSecondPartValid = idNumber.secondPart.length === 1 && /^\d$/.test(idNumber.secondPart); // 1자리 숫자
+    const isSecondPartValid = ['1', '2', '3', '4'].includes(idNumber.secondPart); // 1,2,3,4만 허용
     setIsValid(isFirstPartValid && isSecondPartValid);
+
+    // 오류 메시지 설정
+    if (!isSecondPartValid && idNumber.secondPart !== '') {
+      setError('허용되지 않는 숫자를 입력');
+    } else {
+      setError(null); // 오류 없으면 메시지 초기화
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +66,7 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
 
   return (
     <div css={containerStyle}>
-      <div>
+      <div css={inputSeperater}>
         <input
           css={inputStyle}
           type="text"
@@ -64,63 +76,94 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
           maxLength={6}
           placeholder="000616"
         />
-        -
-        <div>
-          <input
-            css={inputStyleSmall}
-            type="text"
-            name="secondPart"
-            value={idNumber.secondPart}
-            onChange={handleInputChange}
-            maxLength={1}
-            placeholder="4"
-          />
+        <Divider />
+        <input
+          css={inputStyleSmall}
+          type="text"
+          name="secondPart"
+          value={idNumber.secondPart}
+          onChange={handleInputChange}
+          maxLength={1}
+          placeholder="4"
+        />
+        <div css={circlesContainerStyle}>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div key={index} css={circleStyle}></div>
+          ))}
         </div>
       </div>
+      {error && <AuthError message={error} />} {/* 에러 메시지 표시 */}
       <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
     </div>
   );
 };
+
+const Divider = styled.div`
+  font-size: ${variables.size.max};
+  width: 1.6rem;
+  height: 0.1rem;
+  margin-top: 3rem;
+  background-color: ${variables.colors.gray50};
+`;
 
 const containerStyle = css`
   display: flex;
   flex-direction: column;
 `;
 
+const inputSeperater = css`
+  display: flex;
+  gap: 1rem;
+`;
+
 const inputStyle = css`
-  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  margin: 5px;
-  width: 170px;
-  font-size: 16px;
+  border-radius: ${variables.borderRadius};
+  width: 17rem !important;
+  font-size: ${variables.size.large} !important;
 
   &:focus {
-    border-color: #007bff;
+    border-color: ${variables.colors.primary};
     outline: none;
   }
 
   &::placeholder {
     color: #aaa;
+    font-size: ${variables.size.large};
   }
 `;
 
 const inputStyleSmall = css`
-  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  margin: 5px;
-  width: 48px;
-  font-size: 16px;
+  border-radius: ${variables.borderRadius};
+  width: 4.8rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${variables.size.large} !important;
 
   &:focus {
-    border-color: #007bff;
+    border-color: ${variables.colors.primary};
     outline: none;
   }
 
   &::placeholder {
     color: #aaa;
+    font-size: ${variables.size.large};
   }
+`;
+
+const circlesContainerStyle = css`
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+`;
+
+const circleStyle = css`
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: ${variables.colors.gray50};
+  border-radius: 50%;
 `;
 
 export default SetupKoreanIDInput;

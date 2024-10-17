@@ -61,7 +61,6 @@ const inputWrapper = css`
   position: relative;
   display: flex;
   align-items: center;
-  width: 36.8rem;
 `;
 
 const inputStyles = (status: InputStatus) => css`

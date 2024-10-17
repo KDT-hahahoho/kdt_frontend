@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 
 type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success';
-
+//TODO - 버튼 width에 대한 생각 해봐야함 + 위치를 어떻게 고정할지
 interface ButtonProps {
   text: string; // 버튼 이름
   variant?: ButtonVariant; // 버튼의 색상이나 추가 스타일
@@ -24,13 +24,14 @@ const Button = ({
 
   const sizeStyles = {
     small: css`
+      width: 100%;
       padding: 0.8rem 1.2rem;
       font-size: 1.4rem;
       text-align: center;
       box-sizing: border-box;
     `,
     medium: css`
-      width: 36.8rem; /* 368px */
+      width: 100%;
       padding: 1.4rem 2rem; /* 14px 20px */
       font-size: 1.6rem; /* 16px */
       height: 4.6rem; /* 46px */
@@ -38,7 +39,7 @@ const Button = ({
       box-sizing: border-box;
     `,
     large: css`
-      width: 36.8rem; /* 368px */
+      width: 100%;
       padding: 1.6rem 2.4rem; /* 16px 24px */
       font-size: 1.8rem; /* 18px */
       height: 5.6rem; /* 56px */
