@@ -25,7 +25,7 @@ export interface ProfileSetupInterface {
 }
 
 const ProfileSetup = ({
-  submitSignup,
+  submitSignup = () => {},
   steps,
   nextClickHandler,
   Funnel,

@@ -2,6 +2,51 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import Button from '@components/common/Button';
 
+interface CheckAgreementProps {
+  submitSignup: () => void | undefined;
+  onClose?: () => void;
+}
+
+// CheckAgreement 컴포넌트
+const CheckAgreement = ({ submitSignup }: CheckAgreementProps) => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [checkboxStates, setCheckboxStates] = useState([false, false, false]);
+
+  const handleMainCheckboxChange = () => {
+    const newChecked = !isChecked;
+    setIsChecked(newChecked);
+    setCheckboxStates(checkboxStates.map(() => newChecked));
+  };
+
+  const handleCheckboxChange = (index: number) => {
+    const updatedStates = [...checkboxStates];
+    updatedStates[index] = !updatedStates[index];
+    setIsChecked(updatedStates.every((state) => state));
+    setCheckboxStates(updatedStates);
+  };
+
+  return (
+    <BottomSheetContainer isVisible={true}>
+      <Title>약관 동의</Title>
+      <CheckboxContainer>
+        <CheckboxLabel>
+          <CheckboxInput type="checkbox" checked={isChecked} onChange={handleMainCheckboxChange} />
+          전체 동의
+        </CheckboxLabel>
+      </CheckboxContainer>
+      {checkboxStates.map((state, index) => (
+        <CheckboxContainer key={index}>
+          <CheckboxLabel>
+            <CheckboxInput type="checkbox" checked={state} onChange={() => handleCheckboxChange(index)} />
+            약관 {index + 1}: 사용자 동의 내용이 여기에 들어갑니다.
+          </CheckboxLabel>
+        </CheckboxContainer>
+      ))}
+      <Button variant="primary" size="large" onClick={submitSignup} text="완료" />
+    </BottomSheetContainer>
+  );
+};
+
 // 바텀 시트 스타일
 const BottomSheetContainer = styled.div<{ isVisible: boolean }>`
   position: fixed;
@@ -51,50 +96,5 @@ const CheckboxLabel = styled.label`
 const CheckboxInput = styled.input`
   margin-right: 10px;
 `;
-
-interface CheckAgreementProps {
-  submitSignup: () => void;
-  onClose?: () => void;
-}
-
-// CheckAgreement 컴포넌트
-const CheckAgreement = ({ submitSignup }: CheckAgreementProps) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [checkboxStates, setCheckboxStates] = useState([false, false, false]);
-
-  const handleMainCheckboxChange = () => {
-    const newChecked = !isChecked;
-    setIsChecked(newChecked);
-    setCheckboxStates(checkboxStates.map(() => newChecked));
-  };
-
-  const handleCheckboxChange = (index: number) => {
-    const updatedStates = [...checkboxStates];
-    updatedStates[index] = !updatedStates[index];
-    setIsChecked(updatedStates.every((state) => state));
-    setCheckboxStates(updatedStates);
-  };
-
-  return (
-    <BottomSheetContainer isVisible={true}>
-      <Title>약관 동의</Title>
-      <CheckboxContainer>
-        <CheckboxLabel>
-          <CheckboxInput type="checkbox" checked={isChecked} onChange={handleMainCheckboxChange} />
-          전체 동의
-        </CheckboxLabel>
-      </CheckboxContainer>
-      {checkboxStates.map((state, index) => (
-        <CheckboxContainer key={index}>
-          <CheckboxLabel>
-            <CheckboxInput type="checkbox" checked={state} onChange={() => handleCheckboxChange(index)} />
-            약관 {index + 1}: 사용자 동의 내용이 여기에 들어갑니다.
-          </CheckboxLabel>
-        </CheckboxContainer>
-      ))}
-      <Button variant="primary" size="large" onClick={submitSignup} text="완료" />
-    </BottomSheetContainer>
-  );
-};
 
 export default CheckAgreement;
