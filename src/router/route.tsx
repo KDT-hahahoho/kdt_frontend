@@ -1,10 +1,13 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
-import SignUpPage from '@pages/User/signup/SignUpPage';
-import LoginPage from '@pages/User/login/LoginPage';
 import Layout from '@components/layout/Layout';
 import Home from '@pages/Home/Home';
+import LoginPage from '@pages/User/login/LoginPage';
+import SignUpPage from '@pages/User/signup/SignUpPage';
 import Counseling from '@pages/counseling/Counseling';
+import Emotion from '@pages/emotion/Emotion';
+import EmotionMessage from '@pages/emotion/message/EmotionMessage';
+import EmotionRecord from '@pages/emotion/record/EmotionRecord';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,24 @@ const router = createBrowserRouter([
       {
         path: '/counseling',
         element: <Counseling />,
+      },
+      {
+        path: 'emotion',
+        element: <Emotion />,
+        children: [
+          {
+            index: true,
+            element: <EmotionRecord />,
+          },
+          {
+            path: 'record',
+            element: <EmotionRecord />,
+          },
+          {
+            path: 'message',
+            element: <EmotionMessage />,
+          },
+        ],
       },
     ],
   },
