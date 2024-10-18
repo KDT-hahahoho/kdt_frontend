@@ -7,7 +7,7 @@ import SignUpPage from '@pages/User/signup/SignUpPage';
 import Counseling from '@pages/counseling/Counseling';
 import Emotion from '@pages/emotion/Emotion';
 import EmotionMessage from '@pages/emotion/message/EmotionMessage';
-import EmotionRecord from '@pages/emotion/record/EmotionRecord';
+import EmotionRecordPage from '@pages/emotion/record/EmotionRecordPage';
 
 const router = createBrowserRouter([
   {
@@ -40,11 +40,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <EmotionRecord />,
+            element: <Navigate to="record" />,
           },
           {
             path: 'record',
-            element: <EmotionRecord />,
+            element: <EmotionRecordPage />,
           },
           {
             path: 'message',
