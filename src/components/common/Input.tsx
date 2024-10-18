@@ -64,7 +64,7 @@ const inputWrapper = css`
 `;
 
 const inputStyles = (status: InputStatus) => css`
-  font-size: 1.8rem;
+  font-size: 1.8rem !important;
   border: 1px solid #ddd;
   width: 100%;
 

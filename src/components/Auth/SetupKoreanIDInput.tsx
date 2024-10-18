@@ -43,7 +43,7 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
 
     // 오류 메시지 설정
     if (!isSecondPartValid && idNumber.secondPart !== '') {
-      setError('허용되지 않는 숫자를 입력');
+      setError('주민등록번호 뒷자리를 확인 해 주세요');
     } else {
       setError(null); // 오류 없으면 메시지 초기화
     }
@@ -59,8 +59,6 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
       const newIdNumber = `${idNumber.firstPart}-${idNumber.secondPart}`;
       onChange(newIdNumber); // 상위 컴포넌트로 주민등록번호 전달
       onNext(); // 다음 단계로 진행
-    } else {
-      alert('주민등록번호를 정확하게 입력해주세요.');
     }
   };
 
@@ -93,7 +91,7 @@ const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, 
         </div>
       </div>
       {error && <AuthError message={error} />} {/* 에러 메시지 표시 */}
-      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
+      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} fixed={true} />
     </div>
   );
 };

@@ -63,7 +63,7 @@ const SetupName: React.FC<SetupNameProps> = ({ onNext, value, onChange }) => {
         error && ( // 필드가 수정된 후에만 에러 메시지 표시
           <AuthError message={error} />
         )}
-      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
+      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} fixed={true} />
     </div>
   );
 };
