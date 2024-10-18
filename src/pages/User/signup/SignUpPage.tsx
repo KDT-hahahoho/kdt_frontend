@@ -5,6 +5,7 @@ import { useFunnel } from '@hooks/useFunnel';
 import PageTitleHeader from '@components/Auth/PageTitleHeader';
 import SignupProgressBar from '@components/common/GenericProgressBar';
 import { determineGenderFromKoreanId } from '@utils/validation/handleValidation';
+import { useNavigate } from 'react-router-dom';
 
 const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력', '약관동의'];
 
@@ -17,6 +18,7 @@ const SignUpPage = () => {
     gender: '',
   });
 
+  const navigate = useNavigate();
   const { Funnel, Step, setStep, currentStep } = useFunnel(steps[0]);
 
   // 프로그레스바에 필요한 로직
@@ -45,6 +47,8 @@ const SignUpPage = () => {
 
   const submitSignup = useCallback(() => {
     console.log('Submitting signup data:', formData);
+
+    navigate('/users/welcome');
   }, [formData]);
 
   const nextClickHandler = useCallback(
