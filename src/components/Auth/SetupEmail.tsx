@@ -52,7 +52,7 @@ const SetupEmail: React.FC<SetupEmailProps> = ({ onNext, value, onChange }) => {
         placeholder="이메일 입력"
       />
       {error && <AuthError message={error} />} {/* 에러 메시지 표시 */}
-      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
+      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} fixed={true} />
     </div>
   );
 };

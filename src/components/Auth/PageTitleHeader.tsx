@@ -41,4 +41,5 @@ export default PageTitleHeader;
 const PageTitle = styled.h2`
   font-size: ${variables.size.max};
   margin-bottom: 3.8rem;
+  font-weight: 400;
 `;
