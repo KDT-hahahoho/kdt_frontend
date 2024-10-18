@@ -15,17 +15,17 @@ export default defineConfig({
         theme_color: '#ffffff', // 테마 색상
         icons: [
           {
-            src: '/icons/icon-192x192.png', // 아이콘 경로
+            src: 'public/icons/pwa-192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/icons/icon-512x512.png', // 큰 아이콘 경로
+            src: 'public/icons/pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
           {
-            src: '/icons/icon-512x512.png',
+            src: 'public/icons/pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable',
