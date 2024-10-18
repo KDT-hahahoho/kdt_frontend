@@ -5,6 +5,7 @@ import LoginPage from '@pages/User/login/LoginPage';
 import Layout from '@components/layout/Layout';
 import Home from '@pages/Home/Home';
 import Counseling from '@pages/counseling/Counseling';
+import Testing from '@pages/scale/Testing';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/counseling',
         element: <Counseling />,
+      },
+      {
+        path: '/scale/testing',
+        element: <Testing />,
       },
     ],
   },
