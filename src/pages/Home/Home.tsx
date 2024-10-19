@@ -17,7 +17,7 @@ const Home = () => {
             <Link to="/counseling">심리 상담</Link>
           </li>
           <li>
-            <Link to="/emotion">감정 기록</Link>
+            <Link to="/emotion/record">감정 기록</Link>
           </li>
         </ul>
       </nav>
