@@ -7,7 +7,7 @@ import mainlock from '@assets/Images/mainlock.svg';
 const CoupleInfomation = () => {
   return (
     <CoupleInfomationContainer>
-      <CoupleInfoTitle>원활한 사용을 위해 부부 연동이 필요해요</CoupleInfoTitle>
+      <CoupleInfoTitle>원활한 사용을 위해 부부 연동이 필요해요!</CoupleInfoTitle>
       <CoupleCardsWrapper>
         <PersonalCard>
           <CardImage src={profileImg} alt="User Image" />
@@ -59,6 +59,7 @@ const PersonalCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 1rem;
   box-shadow: ${variables.BoxShadow};
 `;
@@ -70,6 +71,7 @@ const SpouseCard = styled.div`
   height: 21rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 1rem;
   box-shadow: ${variables.BoxShadow};
@@ -97,7 +99,7 @@ const EmotionAnalysis = styled.div`
 const CoupleMission = styled.div`
   width: 100%;
   height: 6rem;
-  font-size: ${variables.size.big};
+  font-size: ${variables.size.medium};
   font-weight: 700;
   display: flex;
   justify-content: center;
