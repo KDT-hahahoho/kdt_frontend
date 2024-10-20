@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 
-interface SignupProgressBarInterface {
+interface GenericProgressBarInterface {
   progress: number;
 }
 
-const SignupProgressBar = ({ progress }: SignupProgressBarInterface) => {
+const GenericProgressBar = ({ progress }: GenericProgressBarInterface) => {
   return (
     <ProgressBarContainer>
       <StyledProgressBar progress={progress} />
@@ -21,7 +21,7 @@ const ProgressBarContainer = styled.div`
   margin-bottom: 3rem;
 `;
 
-const StyledProgressBar = styled.div<SignupProgressBarInterface>`
+const StyledProgressBar = styled.div<GenericProgressBarInterface>`
   width: 100%;
   height: 100%;
   background-color: ${variables.colors.primarySoft};
@@ -51,4 +51,4 @@ const StyledProgressBar = styled.div<SignupProgressBarInterface>`
   }
 `;
 
-export default SignupProgressBar;
+export default GenericProgressBar;
