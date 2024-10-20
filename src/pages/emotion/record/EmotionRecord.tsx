@@ -1,5 +1,8 @@
 import { FunnelProps, StepProps } from '@hooks/useFunnel';
-import EmotionForm from './EmotionForm';
+import EmotionGood from './EmotionGood';
+import EmotionBad from './EmotionBad';
+import EmotionEffort from './EmotionEffort';
+import { IEmotionRecord } from './EmotionRecordPage';
 
 interface IEmotionRecordProps {
   steps: string[];
@@ -7,28 +10,44 @@ interface IEmotionRecordProps {
   nextClickHandler: (nextStep: string) => void;
   Funnel: React.ComponentType<FunnelProps>;
   Step: React.ComponentType<StepProps>;
+  emotionRecord: IEmotionRecord;
+  updateRecord: (field: string, value: string[]) => void;
 }
 
-const EmotionRecord = ({ steps, prevClickHandler, nextClickHandler, Funnel, Step }: IEmotionRecordProps) => {
+const EmotionRecord = ({
+  steps,
+  prevClickHandler,
+  nextClickHandler,
+  Funnel,
+  Step,
+  emotionRecord,
+  updateRecord,
+}: IEmotionRecordProps) => {
   return (
     <Funnel>
-      <Step name="goods">
-        <EmotionForm>
-          "좋았던 일 기록"
-          <button onClick={() => nextClickHandler(steps[1])}>다음</button>
-        </EmotionForm>
+      <Step name="good">
+        <EmotionGood
+          onNext={() => nextClickHandler(steps[1])}
+          value={emotionRecord.good}
+          onChange={(value) => updateRecord('good', value)}
+        />
       </Step>
 
-      <Step name="bads">
-        "안 좋았던 일 기록"
-        <button onClick={() => prevClickHandler(steps[0])}>이전</button>
-        <button onClick={() => nextClickHandler(steps[2])}>다음</button>
+      <Step name="bad">
+        <EmotionBad
+          onPrev={() => prevClickHandler(steps[0])}
+          onNext={() => nextClickHandler(steps[2])}
+          value={emotionRecord.bad}
+          onChange={(value) => updateRecord('bad', value)}
+        />
       </Step>
 
-      <Step name="efforts">
-        "노력한 일 기록"
-        <button onClick={() => prevClickHandler(steps[1])}>이전</button>
-        <button onClick={() => console.log('한 마디 입력으로 이동!')}>종료</button>
+      <Step name="effort">
+        <EmotionEffort
+          onPrev={() => prevClickHandler(steps[1])}
+          value={emotionRecord.effort}
+          onChange={(value) => updateRecord('effort', value)}
+        />
       </Step>
     </Funnel>
   );
