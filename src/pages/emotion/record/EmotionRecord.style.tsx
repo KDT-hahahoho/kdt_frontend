@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 
 export const EmotionLayout = styled.section`
-  height: calc(100vh - 2 * ${variables.layoutPadding});
+  height: calc(100vh - ${variables.layoutPadding});
   padding-top: calc(7.2rem - ${variables.layoutPadding});
   box-sizing: border-box;
   display: flex;
