@@ -3,6 +3,7 @@ const variables = {
     primary: '#ccb2ff',
     primaryStrong: '#b691ff',
     primarySoft: '#eee5ff',
+    primaryLight: '#f8f4ff',
     secondary: '#ffd4cb',
     secondaryStrong: '#ffa997',
     secondarySoft: '#ffefeb',
