@@ -27,13 +27,14 @@ const Footer = () => {
 const FooterContainer = styled.footer`
   position: fixed;
   bottom: 0;
-  width: 100%;
-  left: ${variables.layoutPadding}; /* 좌측 패딩 적용 */
-  right: ${variables.layoutPadding}; /* 우측 패딩 적용 */
-  width: auto; /* 고정된 버튼이 전체 화면을 벗어나지 않도록 너비 자동 조정 */
+  width: auto;
+  height: 8.3rem;
+  left: ${variables.layoutPadding};
+  right: ${variables.layoutPadding};
   background-color: #f8f9fa;
   display: flex;
   justify-content: center;
+  border-radius: ${variables.borderRadius};
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 `;
 
