@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import variables from '@styles/Variables';
 
-type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success';
+type ButtonVariant = 'primary' | 'secondary' | 'non' | 'success';
 
 interface ButtonProps {
   text: string; // 버튼 이름
@@ -66,9 +66,9 @@ const Button = ({
     `
       background-color: #6c757d;
     `}
-    ${variant === 'danger' &&
+    ${variant === 'non' &&
     `
-      background-color: #dc3545;
+      
     `}
     ${variant === 'success' &&
     `

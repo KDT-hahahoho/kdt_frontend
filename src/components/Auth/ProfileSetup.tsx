@@ -8,6 +8,7 @@ import SetupKoreanIDInput from './SetupKoreanIDInput';
 import SetupEmail from './SetupEmail';
 import SetupPassword from './SetupPassword';
 import CheckAgreement from './CheckAgreement';
+import SetupSubfertility from './SetupSubfertility';
 
 export interface ProfileSetupInterface {
   steps: string[];
@@ -19,6 +20,7 @@ export interface ProfileSetupInterface {
     koreanId: string;
     email: string;
     password: string;
+    subfertility: string;
   };
   submitSignup?: () => void;
   updateFormData: (field: string, value: string) => void;
@@ -64,6 +66,14 @@ const ProfileSetup = ({
           onNext={() => nextClickHandler(steps[4])}
           value={formData.password}
           onChange={(value) => updateFormData('password', value)}
+        />
+      </Step>
+
+      <Step name="난임여부">
+        <SetupSubfertility
+          onNext={() => nextClickHandler(steps[5])}
+          value={formData.subfertility}
+          onChange={(value) => updateFormData('subfertility', value)}
         />
       </Step>
 
