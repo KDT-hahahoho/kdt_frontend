@@ -245,4 +245,12 @@ export const InputArea = styled.div`
       }
     }
   }
+
+  /* & > p {
+    margin-top: 0.5rem;
+    padding-left: 2.6rem;
+    font-size: ${variables.size.small};
+    color: ${variables.colors.tertiary};
+    font-weight: 600;
+  } */
 `;

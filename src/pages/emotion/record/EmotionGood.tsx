@@ -19,15 +19,18 @@ const EmotionGood = ({
 }) => {
   const [userInput, setUserInput] = useState<string>('');
   const [goodRecords, setGoodRecords] = useState<string[]>(value);
+  // const [isWritten, setIsWritten] = useState<boolean>(true);
 
   const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!userInput.trim()) {
+      // setIsWritten(false);
       setUserInput('');
       return null;
     }
 
+    // setIsWritten(true);
     setGoodRecords((prev) => [...prev, userInput]);
     setUserInput('');
   };
@@ -53,9 +56,7 @@ const EmotionGood = ({
             <pre key={index}>{item}</pre>
           ))}
         </MessageContainer>
-        <ButtonContainer>
-          <button onClick={handleNext}>{goodRecords.length ? '다음 대화' : '없어요'}</button>
-        </ButtonContainer>
+        <ButtonContainer>{goodRecords.length ? <button onClick={handleNext}>다음 대화</button> : ''}</ButtonContainer>
       </ChattingArea>
 
       <InputArea>
@@ -73,6 +74,7 @@ const EmotionGood = ({
             <img src="/src/assets/Images/icon-send.svg" alt="전송" />
           </button>
         </form>
+        {/* {!isWritten && <p>내용을 입력해주세요!</p>} */}
       </InputArea>
     </EmotionContainer>
   );
