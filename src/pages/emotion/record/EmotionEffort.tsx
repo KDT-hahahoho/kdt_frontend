@@ -6,8 +6,10 @@ import {
   EmotionContainer,
   InputArea,
   MessageContainer,
+  ToastContainer,
 } from './EmotionRecord.style';
 import { useState } from 'react';
+import Toast from '@components/common/Toast';
 
 const EmotionEffort = ({
   onPrev,
@@ -21,18 +23,18 @@ const EmotionEffort = ({
   const navigate = useNavigate();
   const [userInput, setUserInput] = useState<string>('');
   const [efforts, setEfforts] = useState<string[]>(value);
-  // const [isWritten, setIsWritten] = useState<boolean>(true);
+  const [toast, setToast] = useState<boolean>(false);
 
   const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!userInput.trim()) {
-      // setIsWritten(false);
+      setToast(true);
       setUserInput('');
       return null;
     }
 
-    // setIsWritten(true);
+    setToast(false);
     setEfforts((prev) => [...prev, userInput]);
     setUserInput('');
   };
@@ -84,7 +86,11 @@ const EmotionEffort = ({
             <img src="/src/assets/Images/icon-send.svg" alt="전송" />
           </button>
         </form>
-        {/* {!isWritten && <p>내용을 입력해주세요!</p>} */}
+        {toast && (
+          <ToastContainer>
+            <Toast text="내용을 입력해주세요!" setToast={setToast} />
+          </ToastContainer>
+        )}
       </InputArea>
     </EmotionContainer>
   );

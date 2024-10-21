@@ -177,6 +177,7 @@ export const InputArea = styled.div`
   padding-top: 1.2rem;
   padding-bottom: 4.5rem;
   background-color: ${variables.colors.primaryLight};
+  position: relative;
 
   & > form {
     display: flex;
@@ -245,12 +246,11 @@ export const InputArea = styled.div`
       }
     }
   }
+`;
 
-  /* & > p {
-    margin-top: 0.5rem;
-    padding-left: 2.6rem;
-    font-size: ${variables.size.small};
-    color: ${variables.colors.tertiary};
-    font-weight: 600;
-  } */
+export const ToastContainer = styled.div`
+  width: calc(100% - 2 * ${variables.layoutPadding});
+  position: absolute;
+  top: -6.3rem;
+  left: ${variables.layoutPadding};
 `;

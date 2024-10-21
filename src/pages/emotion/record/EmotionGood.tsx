@@ -1,3 +1,4 @@
+import Toast from '@components/common/Toast';
 import { useState } from 'react';
 import {
   AIMessageContainer,
@@ -6,6 +7,7 @@ import {
   EmotionContainer,
   InputArea,
   MessageContainer,
+  ToastContainer,
 } from './EmotionRecord.style';
 
 const EmotionGood = ({
@@ -19,18 +21,18 @@ const EmotionGood = ({
 }) => {
   const [userInput, setUserInput] = useState<string>('');
   const [goodRecords, setGoodRecords] = useState<string[]>(value);
-  // const [isWritten, setIsWritten] = useState<boolean>(true);
+  const [toast, setToast] = useState<boolean>(false);
 
   const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!userInput.trim()) {
-      // setIsWritten(false);
+      setToast(true);
       setUserInput('');
       return null;
     }
 
-    // setIsWritten(true);
+    setToast(false);
     setGoodRecords((prev) => [...prev, userInput]);
     setUserInput('');
   };
@@ -74,7 +76,11 @@ const EmotionGood = ({
             <img src="/src/assets/Images/icon-send.svg" alt="전송" />
           </button>
         </form>
-        {/* {!isWritten && <p>내용을 입력해주세요!</p>} */}
+        {toast && (
+          <ToastContainer>
+            <Toast text="내용을 입력해주세요!" setToast={setToast} />
+          </ToastContainer>
+        )}
       </InputArea>
     </EmotionContainer>
   );
