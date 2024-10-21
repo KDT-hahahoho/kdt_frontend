@@ -1,13 +1,13 @@
-// SignUpPage.tsx
 import React, { useState, useCallback } from 'react';
 import ProfileSetup from '@components/Auth/ProfileSetup';
 import GenericForm from '@components/common/GenericForm';
 import { useFunnel } from '@hooks/useFunnel';
 import PageTitleHeader from '@components/Auth/PageTitleHeader';
-import SignupProgressBar from '@components/Auth/SignupProgressBar';
+import SignupProgressBar from '@components/common/GenericProgressBar';
+import { useNavigate } from 'react-router-dom';
 import { determineGenderFromKoreanId } from '@utils/validation/handleValidation';
 
-const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력', '약관동의'];
+const steps = ['이름 입력', '주민등록번호 입력', '이메일 입력', '비밀번호 입력', '난임여부', '약관동의'];
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -16,8 +16,11 @@ const SignUpPage = () => {
     email: '',
     password: '',
     gender: '',
+    subfertility: '',
+    keywords: '',
   });
 
+  const navigate = useNavigate();
   const { Funnel, Step, setStep, currentStep } = useFunnel(steps[0]);
 
   // 프로그레스바에 필요한 로직
@@ -46,6 +49,8 @@ const SignUpPage = () => {
 
   const submitSignup = useCallback(() => {
     console.log('Submitting signup data:', formData);
+
+    navigate('/users/welcome');
   }, [formData]);
 
   const nextClickHandler = useCallback(

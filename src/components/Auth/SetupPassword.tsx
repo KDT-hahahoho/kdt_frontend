@@ -2,7 +2,8 @@ import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import { handleValidation } from '@utils/validation/handleValidation';
 import React, { useEffect, useState } from 'react';
-import ToolTip from '@components/common/ToolTip';
+import styled from '@emotion/styled';
+import AuthError from './AuthError';
 
 interface SetupPasswordProps {
   onNext: () => void;
@@ -50,20 +51,27 @@ const SetupPassword: React.FC<SetupPasswordProps> = ({ onNext, value, onChange }
         name="비밀번호"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="비밀번호를 입력하세요"
+        placeholder="비밀번호를 입력하세요 최소 6자리 이상"
+        status={handleValidation(error, password)}
       />
+      <InputDivider />
       <Input
         type="password"
         name="비밀번호 확인"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        placeholder="비밀번호를 다시 입력하세요"
+        placeholder="비밀번호를 한번 더 입력해주세요"
         status={handleValidation(error, password)}
       />
-      {error && <ToolTip title="인증" position="bottom" tooltipItem={'비밀번호가 일치하지 않습니다.'} />}
-      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} />
+      {error && <AuthError message={error} type="tooltip" />}
+      <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} fixed={true} />
     </div>
   );
 };
+
+const InputDivider = styled.div`
+  width: 100%;
+  height: 4.5rem;
+`;
 
 export default SetupPassword;

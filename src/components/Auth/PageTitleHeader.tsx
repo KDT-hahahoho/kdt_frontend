@@ -25,6 +25,9 @@ const PageTitleHeader = ({ currentStep }: PageTitleHeaderProps) => {
         case '비밀번호 입력':
           setPageName('비밀번호를 입력해주세요');
           break;
+        case '난임여부':
+          setPageName('최근 1년간 난임 진단을 받은 경험이 있나요?');
+          break;
         default:
           setPageName('');
       }
@@ -41,4 +44,5 @@ export default PageTitleHeader;
 const PageTitle = styled.h2`
   font-size: ${variables.size.max};
   margin-bottom: 3.8rem;
+  font-weight: 400;
 `;

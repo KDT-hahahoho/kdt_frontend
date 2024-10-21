@@ -173,19 +173,33 @@ const GlobalStyles = css`
     cursor: pointer;
   }
 
-  /* input, select style */
+  /* input, select, textarea style */
   select {
     color: inherit;
     appearance: none;
     background: url(/img/icon-accordion-blue.svg) no-repeat center right var(--title-medium) / 1rem;
   }
 
+  textarea {
+    all: unset;
+  }
+
   select,
-  input {
+  input,
+  textarea {
     font-family: 'Pretendard', sans-serif; /* Pretendard 폰트 적용 */
     letter-spacing: -0.02em;
     box-sizing: border-box;
     padding: 0;
+  }
+
+  textarea {
+    width: 100%;
+    font-size: ${variables.size.medium};
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
   }
 
   select,
