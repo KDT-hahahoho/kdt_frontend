@@ -37,6 +37,11 @@ const EmotionEffort = ({
     setUserInput('');
   };
 
+  const handlePrev = () => {
+    onChange(efforts);
+    onPrev();
+  };
+
   const handleFinish = () => {
     onChange(efforts);
     navigate('/emotion/message');
@@ -59,7 +64,7 @@ const EmotionEffort = ({
           ))}
         </MessageContainer>
         <ButtonContainer>
-          <button onClick={() => onPrev()}>이전 대화</button>
+          <button onClick={handlePrev}>이전 대화</button>
           {efforts.length ? <button onClick={handleFinish}>대화 마치기</button> : ''}
         </ButtonContainer>
       </ChattingArea>

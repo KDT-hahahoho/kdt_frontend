@@ -37,6 +37,11 @@ const EmotionBad = ({
     setUserInput('');
   };
 
+  const handlePrev = () => {
+    onChange(badRecords);
+    onPrev();
+  };
+
   const handleNext = () => {
     onChange(badRecords);
     onNext();
@@ -59,7 +64,7 @@ const EmotionBad = ({
           ))}
         </MessageContainer>
         <ButtonContainer>
-          <button onClick={() => onPrev()}>이전 대화</button>
+          <button onClick={handlePrev}>이전 대화</button>
           {badRecords.length ? <button onClick={handleNext}>다음 대화</button> : ''}
         </ButtonContainer>
       </ChattingArea>
