@@ -3,10 +3,10 @@ import { css, keyframes } from '@emotion/react';
 import variables from '@styles/Variables';
 import { FormEvent, useEffect, useState } from 'react';
 import fetchGPT from '../../hooks/useGPT';
-import prevIcon from '../../../public/img/icon-pagePrev.svg';
-import wishIcon from '../../../public/img/icon-wishProfile.svg';
-import sendIcon from '../../../public/img/icon-send.svg';
-import arrow from '../../../public/img/icon-guideArrow.svg';
+import prevIcon from '/img/icon-page-prev.svg';
+import wishIcon from '/img/icon-wish-profile.svg';
+import sendIcon from '/img/icon-send.svg';
+import arrow from '/img/icon-guide-arrow.svg';
 
 interface Message {
   sender?: string;
