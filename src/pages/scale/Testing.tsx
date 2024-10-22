@@ -1,9 +1,9 @@
-import SignupProgressBar from '@components/Auth/SignupProgressBar';
+import GenericProgressBar from '@components/common/GenericProgressBar';
+import styled from '@emotion/styled';
 import { useFunnel } from '@hooks/useFunnel';
+import variables from '@styles/Variables';
 import { useCallback, useState } from 'react';
 import Questions from './Questions';
-import styled from '@emotion/styled';
-import variables from '@styles/Variables';
 
 export interface TestingFormData {
   [key: string]: string;
@@ -17,6 +17,7 @@ export interface TestingFormData {
 
 const Testing = () => {
   const steps = ['1', '2', '3', '4', '5'];
+  const [accData, setAccData] = useState({});
   const [result, setResult] = useState<TestingFormData>({
     total: '0',
     social: '0',
@@ -33,6 +34,7 @@ const Testing = () => {
 
   const onSubmit = useCallback(
     async (formData: TestingFormData) => {
+      setAccData({ ...accData, ...formData });
       setResult((prev) => {
         const newResult = { ...prev };
         for (const key in formData) {
@@ -53,6 +55,30 @@ const Testing = () => {
     [currentStep]
   );
 
+  const toPrevPage = () => setStep(`${Number(currentStep) - 1}`);
+
+  const ProgressBox = styled.div`
+    display: flex;
+    margin-top: -1.6rem;
+    margin-bottom: 2rem;
+    color: ${variables.colors.gray100};
+    font-size: ${variables.size.big};
+    display: none;
+
+    .left {
+      visibility: ${(props) => (props.theme === '1' ? 'hidden' : 'visible')};
+      button {
+        background: url(/img/icon-page-prev.svg) no-repeat center left / 0.8rem;
+        padding-left: 2rem;
+      }
+    }
+    .right {
+      margin-left: auto;
+      p {
+        font-size: ${variables.size.medium};
+      }
+    }
+  `;
   const TopBox = styled.div`
     .info {
       text-align: center;
@@ -66,19 +92,29 @@ const Testing = () => {
       margin: 4rem auto 7rem;
       max-width: 29.6rem;
       img {
-        max-width: 100%;
         height: 18rem;
         aspect-ratio: 295/179;
       }
     }
-  `;
-  const BottomBox = styled.div`
-    padding-bottom: 5.6rem;
+    & + div {
+      padding-bottom: calc(5.6rem + 3rem);
+    }
   `;
 
   return (
     <>
-      <SignupProgressBar progress={progressPercentage} />
+      <GenericProgressBar progress={progressPercentage} />
+      <ProgressBox theme={currentStep}>
+        <div className="left" style={{}}>
+          <button onClick={() => toPrevPage()}>이전 문항</button>
+        </div>
+        <div className="right">
+          <p>
+            {Number(currentStep) - 1}
+            {currentStep === '1' ? '' : '0'} / 46
+          </p>
+        </div>
+      </ProgressBox>
       <TopBox className="top-box">
         <p className="info">숫자가 높을수록 강한 긍정을 의미해요</p>
         <div className="img-box">
@@ -86,7 +122,7 @@ const Testing = () => {
         </div>
       </TopBox>
 
-      <BottomBox>
+      <div>
         <Funnel>
           <Step name="1">
             <Questions onSubmit={onSubmit} page={1} />
@@ -104,7 +140,7 @@ const Testing = () => {
             <Questions onSubmit={onSubmit} page={5} />
           </Step>
         </Funnel>
-      </BottomBox>
+      </div>
     </>
   );
 };

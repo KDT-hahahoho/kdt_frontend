@@ -174,7 +174,7 @@ const Questions = ({ onSubmit, page }: { onSubmit: SubmitHandler<TestingFormData
           </div>
         </InputBox>
       ))}
-      <Button text={page !== 5 ? '다음' : '제출'} type="submit" size="large" disabled={false} />
+      <Button text={page !== 5 ? '다음' : '제출'} type="submit" size="large" disabled={false} fixed={true} />
     </form>
   );
 };
