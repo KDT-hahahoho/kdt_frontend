@@ -64,7 +64,7 @@ const EmotionMessage = () => {
         <MessageItem>
           <MessageTitle>
             <div>
-              <img src="/src/assets/Images/img-wish-wife.svg" alt="나" />
+              <img src="/img/img-wish-wife.svg" alt="나" />
             </div>
 
             <div>
@@ -76,7 +76,7 @@ const EmotionMessage = () => {
         <MessageItem>
           <MessageTitle even>
             <div>
-              <img src="/src/assets/Images/img-wish-husband.svg" alt="남편" />
+              <img src="/img/img-wish-husband.svg" alt="남편" />
             </div>
             <div>
               <p>오늘의 남편에게 한 마디</p>

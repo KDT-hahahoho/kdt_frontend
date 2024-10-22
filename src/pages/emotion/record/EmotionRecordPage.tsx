@@ -3,7 +3,7 @@ import { useFunnel } from '@hooks/useFunnel';
 import useEmotionStore from '@store/useEmotionStore';
 import { useCallback } from 'react';
 import EmotionRecord from './EmotionRecord';
-import { DashedLine, EmotionLayout, ImageContainer, ProgressBar, WishImage } from './EmotionRecord.style';
+import { DashedLine, EmotionLayout, ImageContainer, ProgressBar } from './EmotionRecord.style';
 
 export interface IEmotionRecord {
   good: string[];
@@ -48,9 +48,7 @@ const EmotionRecordPage = () => {
       <ProgressBar>
         <DashedLine />
       </ProgressBar>
-      <ImageContainer>
-        <WishImage src="/src/assets/Images/img-wish-emotion.svg" alt="감정분석가 위시" />
-      </ImageContainer>
+      <ImageContainer />
       <EmotionRecord
         steps={steps}
         prevClickHandler={prevClickHandler}
