@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 
 export const EmotionLayout = styled.section`
-  height: calc(100vh - ${variables.layoutPadding});
+  height: calc(100vh - 1 * ${variables.layoutPadding});
   padding-top: calc(7.2rem - ${variables.layoutPadding});
+  margin-bottom: -4rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -41,12 +42,9 @@ export const ImageContainer = styled.div`
   margin: 0 auto;
   margin-top: 4.5rem;
   position: relative;
-`;
-
-export const WishImage = styled.img`
-  position: absolute;
-  top: 1rem;
-  left: -4.5rem;
+  background-image: url('/img/img-wish-emotion.svg');
+  background-position: top 1rem left -4.5rem;
+  background-repeat: no-repeat;
 `;
 
 export const EmotionContainer = styled.div`
@@ -104,6 +102,7 @@ export const MessageContainer = styled.ul`
   flex-basis: 0;
   flex-grow: 1;
   overflow-y: auto;
+  padding-right: 1rem;
   scrollbar-width: thin;
   scrollbar-color: ${variables.colors.gray50} transparent;
 
@@ -203,6 +202,7 @@ export const InputArea = styled.div`
       }
 
       & > textarea {
+        margin-right: 1rem;
         padding-right: 2.6rem;
         scrollbar-width: thin;
         scrollbar-color: ${variables.colors.gray50} transparent;

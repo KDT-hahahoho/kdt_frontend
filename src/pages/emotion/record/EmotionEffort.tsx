@@ -85,7 +85,7 @@ const EmotionEffort = ({
           </div>
           <button type="submit">
             <span>전송</span>
-            <img src="/src/assets/Images/icon-send.svg" alt="전송" />
+            <img src="/img/icon-send.svg" alt="전송" />
           </button>
         </form>
         {toast && (
