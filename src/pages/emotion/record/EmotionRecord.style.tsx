@@ -2,11 +2,12 @@ import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 
 export const EmotionLayout = styled.section`
-  height: calc(100vh - ${variables.layoutPadding});
+  height: calc(100vh - 2 * ${variables.layoutPadding});
   padding-top: calc(7.2rem - ${variables.layoutPadding});
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const ProgressBar = styled.div`
@@ -104,6 +105,7 @@ export const MessageContainer = styled.ul`
   flex-basis: 0;
   flex-grow: 1;
   overflow-y: auto;
+  padding-right: 1rem;
   scrollbar-width: thin;
   scrollbar-color: ${variables.colors.gray50} transparent;
 
@@ -179,7 +181,10 @@ export const InputArea = styled.div`
   padding-top: 1.2rem;
   padding-bottom: 4.5rem;
   background-color: ${variables.colors.primaryLight};
-  position: relative;
+  position: absolute;
+  bottom: calc(-1 * ${variables.layoutPadding});
+  left: 0;
+  right: 0;
 
   & > form {
     display: flex;
@@ -203,6 +208,7 @@ export const InputArea = styled.div`
       }
 
       & > textarea {
+        margin-right: 1rem;
         padding-right: 2.6rem;
         scrollbar-width: thin;
         scrollbar-color: ${variables.colors.gray50} transparent;
