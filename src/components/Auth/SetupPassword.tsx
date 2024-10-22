@@ -11,7 +11,7 @@ interface SetupPasswordProps {
   onChange: (value: string) => void;
 }
 
-const SetupPassword: React.FC<SetupPasswordProps> = ({ onNext, value, onChange }) => {
+const SetupPassword = ({ onNext, value, onChange }: SetupPasswordProps) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState(''); // 비밀번호 확인 입력
   const [error, setError] = useState<string | null>(null);
