@@ -52,7 +52,7 @@ const SetupPassword: React.FC<SetupPasswordProps> = ({ onNext, value, onChange }
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="비밀번호를 입력하세요 최소 6자리 이상"
-        status={handleValidation(error, password)}
+        status={handleValidation('password', password)} // type 추가
       />
       <InputDivider />
       <Input
@@ -61,7 +61,7 @@ const SetupPassword: React.FC<SetupPasswordProps> = ({ onNext, value, onChange }
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
         placeholder="비밀번호를 한번 더 입력해주세요"
-        status={handleValidation(error, password)}
+        status={handleValidation('password', confirmPassword)}
       />
       {error && <AuthError message={error} type="tooltip" />}
       <Button onClick={handleNext} text="다음" type="submit" size="large" disabled={!isValid} fixed={true} />
