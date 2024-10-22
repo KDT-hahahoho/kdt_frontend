@@ -15,6 +15,8 @@ const GlobalStyles = css`
     min-width: 320px;
     overflow: hidden;
     background: ${variables.colors.gray50};
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   body {
@@ -22,6 +24,16 @@ const GlobalStyles = css`
     color: ${variables.colors.black};
     font-family: 'Pretendard', sans-serif; /* Pretendard 폰트 적용 */
     font-size: ${variables.size.medium};
+    padding: 2rem 1.8rem;
+    background: #fff;
+    height: 100vh;
+    overflow: auto;
+    scrollbar-width: none;
+    position: relative;
+  }
+
+  .container {
+    padding-bottom: 4rem;
   }
 
   html,
@@ -169,6 +181,10 @@ const GlobalStyles = css`
     cursor: pointer;
   }
 
+  img {
+    max-width: 100%;
+  }
+
   label {
     cursor: pointer;
   }
@@ -236,7 +252,6 @@ const GlobalStyles = css`
     outline: 1px solid ${variables.colors.primary};
   }
 
-  /* checkbox style */
   input[type='checkbox'],
   input[type='radio'] {
     all: unset;
@@ -244,34 +259,42 @@ const GlobalStyles = css`
     cursor: pointer;
     position: relative;
     vertical-align: text-top;
-    border-radius: 0.2em;
-    width: 1em;
+    border-radius: 50%;
     aspect-ratio: 1 / 1;
-    background: ${variables.colors.primarySoft};
     margin-right: 0.5em;
     box-sizing: border-box;
   }
 
+  /* checkbox style */
+  input[type='checkbox'] {
+    width: ${variables.size.title};
+    background: ${variables.colors.gray50} url(/img/icon-check.svg) no-repeat center / 60%;
+  }
   input[type='checkbox']:checked {
-    background: ${variables.colors.primary} url(/img/icon-check.svg) no-repeat center / 70%;
+    background-color: ${variables.colors.primary};
   }
 
   /* radio style */
+  input[type='radio'] {
+    width: ${variables.size.large};
+    border: 0.15em solid ${variables.colors.gray50};
+  }
   input[type='radio']:checked {
-    border: 0.15em solid ${variables.colors.primary};
+    border-color: ${variables.colors.primary};
   }
 
   input[type='radio']:after {
     content: '';
     display: block;
     position: absolute;
-    width: calc(100% - 0.22em);
+    width: calc(100% - 0.36em);
     aspect-ratio: 1/1;
     background: ${variables.colors.primary};
     opacity: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 50%;
   }
 
   input[type='radio']:checked:after {
@@ -282,6 +305,15 @@ const GlobalStyles = css`
     :root {
       font-size: 9px;
     }
+  }
+
+  /* common */
+  .hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
   }
 `;
 
