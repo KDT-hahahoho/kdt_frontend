@@ -15,7 +15,7 @@ interface IEmotionStore {
   record: IRecord;
   updateRecord: (field: string, value: string[]) => void;
   message: IMessage;
-  updateMessage: (record: IMessage) => void;
+  updateMessage: (toMe: string, toSpouse: string) => void;
 }
 
 const useEmotionStore = create<IEmotionStore>()((set) => ({
@@ -30,7 +30,8 @@ const useEmotionStore = create<IEmotionStore>()((set) => ({
     toMe: '',
     toSpouse: '',
   },
-  updateMessage: (message) => set((prevState) => ({ ...prevState, message: { ...prevState.message, message } })),
+  updateMessage: (toMe, toSpouse) =>
+    set((prevState) => ({ ...prevState, message: { ...prevState.message, toMe, toSpouse } })),
 }));
 
 export default useEmotionStore;

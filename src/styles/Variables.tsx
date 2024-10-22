@@ -11,6 +11,7 @@ const variables = {
     tertiarySoft: '#ffedda',
     black: '#000',
     gray100: '#737980',
+    gray70: '#949494',
     gray50: '#d9d9d9',
     gray10: '#f5f5f5',
     gray5: '#fafafa',
