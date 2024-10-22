@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 
 export const EmotionLayout = styled.section`
-  height: calc(100vh - 2 * ${variables.layoutPadding});
+  height: calc(100vh - 1 * ${variables.layoutPadding});
   padding-top: calc(7.2rem - ${variables.layoutPadding});
+  margin-bottom: -4rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  position: relative;
 `;
 
 export const ProgressBar = styled.div`
@@ -42,12 +42,9 @@ export const ImageContainer = styled.div`
   margin: 0 auto;
   margin-top: 4.5rem;
   position: relative;
-`;
-
-export const WishImage = styled.img`
-  position: absolute;
-  top: 1rem;
-  left: -4.5rem;
+  background-image: url('/img/img-wish-emotion.svg');
+  background-position: top 1rem left -4.5rem;
+  background-repeat: no-repeat;
 `;
 
 export const EmotionContainer = styled.div`
@@ -181,10 +178,7 @@ export const InputArea = styled.div`
   padding-top: 1.2rem;
   padding-bottom: 4.5rem;
   background-color: ${variables.colors.primaryLight};
-  position: absolute;
-  bottom: calc(-1 * ${variables.layoutPadding});
-  left: 0;
-  right: 0;
+  position: relative;
 
   & > form {
     display: flex;
