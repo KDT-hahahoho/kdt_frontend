@@ -1,6 +1,7 @@
 // 진욱
 import { useFunnel } from '@hooks/useFunnel';
-import { useCallback, useState } from 'react';
+import useEmotionStore from '@store/useEmotionStore';
+import { useCallback } from 'react';
 import EmotionRecord from './EmotionRecord';
 import { DashedLine, EmotionLayout, ImageContainer, ProgressBar, WishImage } from './EmotionRecord.style';
 
@@ -13,24 +14,15 @@ export interface IEmotionRecord {
 const steps = ['good', 'bad', 'effort'];
 
 const EmotionRecordPage = () => {
-  const [emotionRecord, setEmotionRecord] = useState<IEmotionRecord>({
-    good: [],
-    bad: [],
-    effort: [],
-  });
   const { Funnel, Step, setStep, currentStep } = useFunnel(steps[0]);
+  const emotionRecord = useEmotionStore((state) => state.record);
+  const updateEmotionRecord = useEmotionStore((state) => state.updateRecord);
 
   console.log(currentStep);
   // const currentStepIndex = steps.indexOf(currentStep);
 
   const updateRecord = useCallback((field: string, value: string[]) => {
-    setEmotionRecord((prevData) => {
-      const newData = { ...prevData, [field]: value };
-
-      console.log('Updated data:', newData);
-
-      return newData;
-    });
+    updateEmotionRecord(field, value);
   }, []);
 
   const prevClickHandler = useCallback(

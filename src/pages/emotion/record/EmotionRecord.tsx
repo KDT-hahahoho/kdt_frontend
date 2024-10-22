@@ -1,7 +1,7 @@
 import { FunnelProps, StepProps } from '@hooks/useFunnel';
-import EmotionGood from './EmotionGood';
 import EmotionBad from './EmotionBad';
 import EmotionEffort from './EmotionEffort';
+import EmotionGood from './EmotionGood';
 import { IEmotionRecord } from './EmotionRecordPage';
 
 interface IEmotionRecordProps {

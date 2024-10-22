@@ -6,7 +6,9 @@ import {
   EmotionContainer,
   InputArea,
   MessageContainer,
+  ToastContainer,
 } from './EmotionRecord.style';
+import Toast from '@components/common/Toast';
 
 const EmotionBad = ({
   onPrev,
@@ -21,17 +23,25 @@ const EmotionBad = ({
 }) => {
   const [userInput, setUserInput] = useState<string>('');
   const [badRecords, setBadRecords] = useState<string[]>(value);
+  const [toast, setToast] = useState<boolean>(false);
 
   const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!userInput.trim()) {
+      setToast(true);
       setUserInput('');
       return null;
     }
 
+    setToast(false);
     setBadRecords((prev) => [...prev, userInput]);
     setUserInput('');
+  };
+
+  const handlePrev = () => {
+    onChange(badRecords);
+    onPrev();
   };
 
   const handleNext = () => {
@@ -52,12 +62,14 @@ const EmotionBad = ({
       <ChattingArea>
         <MessageContainer>
           {badRecords.map((item, index) => (
-            <pre key={index}>{item}</pre>
+            <li key={index}>
+              <pre>{item}</pre>
+            </li>
           ))}
         </MessageContainer>
         <ButtonContainer>
-          <button onClick={() => onPrev()}>이전 대화</button>
-          <button onClick={handleNext}>{badRecords.length ? '다음 대화' : '없어요'}</button>
+          <button onClick={handlePrev}>이전 대화</button>
+          {badRecords.length ? <button onClick={handleNext}>다음 대화</button> : ''}
         </ButtonContainer>
       </ChattingArea>
 
@@ -76,6 +88,11 @@ const EmotionBad = ({
             <img src="/src/assets/Images/icon-send.svg" alt="전송" />
           </button>
         </form>
+        {toast && (
+          <ToastContainer>
+            <Toast text="내용을 입력해주세요!" setToast={setToast} />
+          </ToastContainer>
+        )}
       </InputArea>
     </EmotionContainer>
   );

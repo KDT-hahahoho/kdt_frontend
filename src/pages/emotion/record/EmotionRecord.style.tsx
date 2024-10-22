@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 
 export const EmotionLayout = styled.section`
-  height: calc(100vh - 2 * ${variables.layoutPadding});
+  height: calc(100vh - ${variables.layoutPadding});
   padding-top: calc(7.2rem - ${variables.layoutPadding});
   box-sizing: border-box;
   display: flex;
@@ -98,7 +98,7 @@ export const ChattingArea = styled.div`
   flex-direction: column;
 `;
 
-export const MessageContainer = styled.div`
+export const MessageContainer = styled.ul`
   margin-bottom: 2rem;
   min-height: 0;
   flex-basis: 0;
@@ -119,23 +119,25 @@ export const MessageContainer = styled.div`
     background-color: ${variables.colors.gray50};
   }
 
-  & > pre {
+  & li {
     width: fit-content;
     max-width: 30rem;
     margin-left: auto;
     padding: 1.4rem 2.2rem;
-
     border-radius: 2rem 2rem 0 2rem;
     border: 0.1rem solid ${variables.colors.gray50};
     box-sizing: border-box;
     box-shadow: 0px 0px 6px rgba(217, 203, 245, 0.3);
     margin-bottom: 1.8rem;
-    font-weight: 500;
-    font-size: ${variables.size.medium};
 
-    overflow: hidden;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
+    & > pre {
+      font-weight: 500;
+      font-size: ${variables.size.medium};
+
+      overflow: hidden;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+    }
 
     &:last-child {
       margin-bottom: unset;
@@ -177,6 +179,7 @@ export const InputArea = styled.div`
   padding-top: 1.2rem;
   padding-bottom: 4.5rem;
   background-color: ${variables.colors.primaryLight};
+  position: relative;
 
   & > form {
     display: flex;
@@ -245,4 +248,11 @@ export const InputArea = styled.div`
       }
     }
   }
+`;
+
+export const ToastContainer = styled.div`
+  width: calc(100% - 2 * ${variables.layoutPadding});
+  position: absolute;
+  top: -6.3rem;
+  left: ${variables.layoutPadding};
 `;

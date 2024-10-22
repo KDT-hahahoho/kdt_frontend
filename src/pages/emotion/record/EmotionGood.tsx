@@ -1,3 +1,4 @@
+import Toast from '@components/common/Toast';
 import { useState } from 'react';
 import {
   AIMessageContainer,
@@ -6,6 +7,7 @@ import {
   EmotionContainer,
   InputArea,
   MessageContainer,
+  ToastContainer,
 } from './EmotionRecord.style';
 
 const EmotionGood = ({
@@ -19,15 +21,18 @@ const EmotionGood = ({
 }) => {
   const [userInput, setUserInput] = useState<string>('');
   const [goodRecords, setGoodRecords] = useState<string[]>(value);
+  const [toast, setToast] = useState<boolean>(false);
 
   const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!userInput.trim()) {
+      setToast(true);
       setUserInput('');
       return null;
     }
 
+    setToast(false);
     setGoodRecords((prev) => [...prev, userInput]);
     setUserInput('');
   };
@@ -50,12 +55,12 @@ const EmotionGood = ({
       <ChattingArea>
         <MessageContainer>
           {goodRecords.map((item, index) => (
-            <pre key={index}>{item}</pre>
+            <li key={index}>
+              <pre>{item}</pre>
+            </li>
           ))}
         </MessageContainer>
-        <ButtonContainer>
-          <button onClick={handleNext}>{goodRecords.length ? '다음 대화' : '없어요'}</button>
-        </ButtonContainer>
+        <ButtonContainer>{goodRecords.length ? <button onClick={handleNext}>다음 대화</button> : ''}</ButtonContainer>
       </ChattingArea>
 
       <InputArea>
@@ -73,6 +78,11 @@ const EmotionGood = ({
             <img src="/src/assets/Images/icon-send.svg" alt="전송" />
           </button>
         </form>
+        {toast && (
+          <ToastContainer>
+            <Toast text="내용을 입력해주세요!" setToast={setToast} />
+          </ToastContainer>
+        )}
       </InputArea>
     </EmotionContainer>
   );
