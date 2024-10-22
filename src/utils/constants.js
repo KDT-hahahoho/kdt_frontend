@@ -1,3 +1,0 @@
-
-
-const USER_EXAMPLES = '123'
