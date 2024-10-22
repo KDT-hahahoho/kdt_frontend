@@ -86,10 +86,10 @@ const Button = ({
       padding: 1.8rem; 
       position: fixed;
       bottom: 3rem;
-      left: ${variables.layoutPadding}; /* 좌측 패딩 적용 */
-      right: ${variables.layoutPadding}; /* 우측 패딩 적용 */
-      width: auto; /* 고정된 버튼이 전체 화면을 벗어나지 않도록 너비 자동 조정 */
-      max-width: calc(100% - 2 * ${variables.layoutPadding});
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 2 * ${variables.layoutPadding}); /* 고정된 버튼이 전체 화면을 벗어나지 않도록 너비 자동 조정 */
+      max-width: calc(500px - 2 * ${variables.layoutPadding});
       z-index: 1000;
     `}
   `;
