@@ -62,7 +62,9 @@ const EmotionEffort = ({
       <ChattingArea>
         <MessageContainer>
           {efforts.map((item, index) => (
-            <pre key={index}>{item}</pre>
+            <li key={index}>
+              <pre>{item}</pre>
+            </li>
           ))}
         </MessageContainer>
         <ButtonContainer>

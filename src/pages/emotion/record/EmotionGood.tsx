@@ -55,7 +55,9 @@ const EmotionGood = ({
       <ChattingArea>
         <MessageContainer>
           {goodRecords.map((item, index) => (
-            <pre key={index}>{item}</pre>
+            <li key={index}>
+              <pre>{item}</pre>
+            </li>
           ))}
         </MessageContainer>
         <ButtonContainer>{goodRecords.length ? <button onClick={handleNext}>다음 대화</button> : ''}</ButtonContainer>

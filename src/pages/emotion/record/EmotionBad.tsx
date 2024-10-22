@@ -62,7 +62,9 @@ const EmotionBad = ({
       <ChattingArea>
         <MessageContainer>
           {badRecords.map((item, index) => (
-            <pre key={index}>{item}</pre>
+            <li key={index}>
+              <pre>{item}</pre>
+            </li>
           ))}
         </MessageContainer>
         <ButtonContainer>
