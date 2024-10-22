@@ -8,6 +8,7 @@ import Counseling from '@pages/counseling/Counseling';
 import EmotionMessage from '@pages/emotion/message/EmotionMessage';
 import EmotionRecordPage from '@pages/emotion/record/EmotionRecordPage';
 import WelcomePage from '@pages/User/welcome/WelcomePage';
+import EmotionMission from '@pages/emotion/mission/EmotionMission';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: 'emotion/message',
         element: <EmotionMessage />,
+      },
+      {
+        path: 'emotion/mission',
+        element: <EmotionMission />,
       },
     ],
   },
