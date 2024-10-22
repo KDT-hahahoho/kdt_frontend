@@ -10,7 +10,7 @@ interface SetupSubfertilityProps {
   onChange: (value: string) => void;
 }
 
-const SetupSubfertility: React.FC<SetupSubfertilityProps> = ({ onNext, value, onChange }) => {
+const SetupSubfertility = ({ onNext, value, onChange }: SetupSubfertilityProps) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(value || null);
 
   useEffect(() => {

@@ -17,7 +17,7 @@ interface IdNumber {
   secondPart: string;
 }
 
-const SetupKoreanIDInput: React.FC<SetupKoreanIDInputProps> = ({ onNext, value, onChange }) => {
+const SetupKoreanIDInput = ({ onNext, value, onChange }: SetupKoreanIDInputProps) => {
   const [idNumber, setIdNumber] = useState<IdNumber>({ firstPart: '', secondPart: '' });
   const [isValid, setIsValid] = useState(false);
   const [error, setError] = useState<string | null>(null); // 오류 메시지 상태 추가
