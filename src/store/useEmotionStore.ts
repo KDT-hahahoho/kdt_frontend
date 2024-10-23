@@ -11,27 +11,37 @@ interface IMessage {
   toSpouse: string;
 }
 
-interface IEmotionStore {
+interface IState {
   record: IRecord;
-  updateRecord: (field: string, value: string[]) => void;
   message: IMessage;
+}
+
+interface IAction {
+  updateRecord: (field: string, value: string[]) => void;
   updateMessage: (toMe: string, toSpouse: string) => void;
 }
 
-const useEmotionStore = create<IEmotionStore>()((set) => ({
+const initialState: IState = {
   record: {
     good: [],
     bad: [],
     effort: [],
   },
-  updateRecord: (field, value) =>
-    set((prevState) => ({ ...prevState, record: { ...prevState.record, [field]: value } })),
   message: {
     toMe: '',
     toSpouse: '',
   },
+};
+
+const useEmotionStore = create<IState & IAction>()((set) => ({
+  ...initialState,
+  updateRecord: (field, value) =>
+    set((prevState) => ({ ...prevState, record: { ...prevState.record, [field]: value } })),
   updateMessage: (toMe, toSpouse) =>
     set((prevState) => ({ ...prevState, message: { ...prevState.message, toMe, toSpouse } })),
+  reset: () => {
+    set(initialState);
+  },
 }));
 
 export default useEmotionStore;
