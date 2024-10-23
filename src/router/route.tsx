@@ -5,6 +5,7 @@ import Home from '@pages/Home/Home';
 import LoginPage from '@pages/User/login/LoginPage';
 import SignUpPage from '@pages/User/signup/SignUpPage';
 import Counseling from '@pages/counseling/Counseling';
+import CounselingList from '@pages/counseling/CounselingList';
 import Testing from '@pages/scale/Testing';
 import EmotionMessage from '@pages/emotion/message/EmotionMessage';
 import EmotionRecordPage from '@pages/emotion/record/EmotionRecordPage';
@@ -37,8 +38,16 @@ const router = createBrowserRouter([
         element: <WelcomePage />,
       },
       {
-        path: '/counseling',
+        path: 'counseling',
         element: <Counseling />,
+      },
+      {
+        path: 'counseling/:id',
+        element: <Counseling />,
+      },
+      {
+        path: 'counseling/list',
+        element: <CounselingList />,
       },
       {
         path: '/scale/testing',
