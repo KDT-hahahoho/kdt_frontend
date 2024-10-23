@@ -1,8 +1,9 @@
 const AI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const MAX_TOKEN = import.meta.env.VITE_TOKEN_MAX;
-const TEMPERATURE_AI = import.meta.env.VITE_TEMPERATURE_AI;
+const TEMPERATURE_AI_COUNSELING = import.meta.env.VITE_TEMPERATURE_AI_COUNSELING;
+const TEMPERATURE_AI_RECORD = import.meta.env.VITE_TEMPERATURE_AI_RECORD;
 
-const fetchGPT = async (prompt: string, question: string) => {
+const fetchGPT = async (prompt: string, question: string, type: 'counseling' | 'record' = 'counseling') => {
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -17,7 +18,7 @@ const fetchGPT = async (prompt: string, question: string) => {
           { role: 'system', content: prompt },
           { role: 'user', content: question },
         ],
-        temperature: Number(TEMPERATURE_AI),
+        temperature: type === 'counseling' ? Number(TEMPERATURE_AI_COUNSELING) : Number(TEMPERATURE_AI_RECORD),
         max_tokens: Number(MAX_TOKEN),
       }),
     });
