@@ -39,6 +39,7 @@ const initialState: IState = {
 interface IAnalysisAction {
   updateAnalysis: (data: IAnalysis) => void;
   updateStep: (step: number) => void;
+  reset: () => void;
 }
 
 const useAnalysisStore = create<IState & IAnalysisAction>()((set) => ({
