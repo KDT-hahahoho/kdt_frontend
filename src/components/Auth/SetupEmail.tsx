@@ -10,7 +10,7 @@ interface SetupEmailProps {
   onChange: (value: string) => void;
 }
 
-const SetupEmail: React.FC<SetupEmailProps> = ({ onNext, value, onChange }) => {
+const SetupEmail = ({ onNext, value, onChange }: SetupEmailProps) => {
   const [email, setEmail] = useState(value); // 초기값을 props에서 받음
   const [error, setError] = useState<string | null>(null);
 

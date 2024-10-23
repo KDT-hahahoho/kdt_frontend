@@ -10,7 +10,7 @@ interface SetupNameProps {
   onChange: (value: string) => void;
 }
 
-const SetupName: React.FC<SetupNameProps> = ({ onNext, value, onChange }) => {
+const SetupName = ({ onNext, value, onChange }: SetupNameProps) => {
   const [name, setName] = useState(value);
   const deferredName = useDeferredValue(name);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
