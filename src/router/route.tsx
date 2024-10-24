@@ -11,7 +11,7 @@ import EmotionMessage from '@pages/emotion/message/EmotionMessage';
 import EmotionRecordPage from '@pages/emotion/record/EmotionRecordPage';
 import WelcomePage from '@pages/User/welcome/WelcomePage';
 import EmotionMission from '@pages/emotion/mission/EmotionMission';
-import EmotionResult from '@pages/emotion/mission/EmotionResult';
+import EmotionResult from '@pages/emotion/result/EmotionResult';
 
 const router = createBrowserRouter([
   {
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         element: <EmotionMission />,
       },
       {
-        path: 'emotion/mission/result',
+        path: 'emotion/result',
         element: <EmotionResult />,
       },
     ],
