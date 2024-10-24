@@ -2,12 +2,18 @@ import variables from '@styles/Variables';
 import React, { useState } from 'react';
 import ECharts from 'echarts-for-react';
 
+interface StressData {
+  value: number;
+  name: string;
+  color: string;
+}
+
 const EmotionStress = () => {
   // const analysisResult = useAnalysisStore((state) => state.analysis);
 
-  const data = [
+  const data: StressData[] = [
     {
-      value: '55',
+      value: 55,
       name: '기존 점수',
       color: `${variables.colors.primary}`,
     },

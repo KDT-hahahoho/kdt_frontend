@@ -3,10 +3,16 @@ import variables from '@styles/Variables';
 import ECharts from 'echarts-for-react';
 import React, { useState } from 'react';
 
-const EmotionGraph = () => {
+interface EmotionData {
+  value: number;
+  name: string;
+  color: string;
+}
+
+const EmotionGraph: React.FC = () => {
   const analysisResult = useAnalysisStore((state) => state.analysis);
 
-  const data = [
+  const data: EmotionData[] = [
     { value: analysisResult.emotions.anger, name: '분노', color: `${variables.colors.primary}` },
     { value: analysisResult.emotions.disgust, name: '혐오', color: `${variables.colors.primaryLight}` },
     { value: analysisResult.emotions.fear, name: '공포', color: `${variables.colors.primarySoft}` },
@@ -30,9 +36,9 @@ const EmotionGraph = () => {
           value: v.value,
           name: v.name,
           itemStyle: {
-            color: v.color, // 각 데이터에 색상 할당
+            color: v.color,
             borderRadius: 4,
-            borderColor: '#fff', // 필요시 경계 색상을 추가
+            borderColor: '#fff',
             borderWidth: 2,
           },
         })),
