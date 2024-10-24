@@ -8,7 +8,7 @@ import {
   MissonTitleSub,
   ButtonContainer,
   MissionExplanation,
-  MessageSection,
+  MissionSection,
 } from './EmotionMission.style';
 import Button from '@components/common/Button';
 import { useNavigate } from 'react-router-dom';
@@ -30,13 +30,13 @@ const EmotionMission = () => {
 
   const handleClick = () => {
     setIsClicked(true);
-    navigate('/emotion/mission/result');
+    navigate('/emotion/result');
     console.log('다음으로');
   };
 
   return (
     <>
-      <MessageSection>
+      <MissionSection>
         <MissionTitleBox>
           <ImageContainer>
             <WishImage src="/img-wish-mission.svg" alt="감정분석가 위시" />
@@ -68,7 +68,7 @@ const EmotionMission = () => {
           배우자가 나에게 작성한 한마디를 확인 할 수 있어요
         </MissionExplanation>
         <Button onClick={handleClick} type="submit" size="medium" text="분석 결과 보기" disabled={false} />
-      </MessageSection>
+      </MissionSection>
     </>
   );
 };

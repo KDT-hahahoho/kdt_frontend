@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 
-export const MessageSection = styled.section`
+export const MissionSection = styled.section`
   height: 100vh;
   margin: calc(-1 * ${variables.layoutPadding});
   padding: ${variables.layoutPadding};
