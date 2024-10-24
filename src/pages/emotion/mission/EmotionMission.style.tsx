@@ -1,18 +1,22 @@
 import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 
-export const MissionLayout = styled.section`
-  height: calc(100vh - (2 * ${variables.layoutPadding} + 6rem));
-  padding-top: calc(7.2rem - ${variables.layoutPadding});
-  box-sizing: border-box;
+export const MessageSection = styled.section`
+  height: 100vh;
+  margin: calc(-1 * ${variables.layoutPadding});
+  padding: ${variables.layoutPadding};
+  margin-bottom: -4rem;
+  padding-bottom: 4rem;
+  background-color: ${variables.colors.gray5};
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
 `;
+
 export const MissionTitleBox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 4rem;
+  margin-top: 10rem;
 `;
 
 export const MissionTextBox = styled.div`
@@ -20,7 +24,6 @@ export const MissionTextBox = styled.div`
 `;
 
 export const MissonTitle = styled.div`
-  margin-top: 3rem;
   font-size: ${variables.size.big};
   font-weight: 600;
 `;
@@ -39,7 +42,6 @@ export const ImageContainer = styled.div`
   width: 4.8rem;
   height: 4.8rem;
   background-color: ${variables.colors.secondarySoft};
-  margin-top: 3rem;
   position: relative;
 `;
 

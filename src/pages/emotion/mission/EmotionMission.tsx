@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  MissionLayout,
   MissonTitle,
   ImageContainer,
   WishImage,
@@ -9,11 +8,15 @@ import {
   MissonTitleSub,
   ButtonContainer,
   MissionExplanation,
+  MessageSection,
 } from './EmotionMission.style';
 import Button from '@components/common/Button';
+import { useNavigate } from 'react-router-dom';
 
 const EmotionMission = () => {
   const [clickButton, setClickButton] = useState('/src/assets/Images/invaildGray.svg');
+  const [, setIsClicked] = useState(false);
+  const navigate = useNavigate();
 
   const handleHover = () => {
     setClickButton('/src/assets/Images/valid.svg');
@@ -24,12 +27,19 @@ const EmotionMission = () => {
     setClickButton('/src/assets/Images/invaildGray.svg');
     console.log('클릭해제');
   };
+
+  const handleClick = () => {
+    setIsClicked(true);
+    navigate('/emotion/mission/result');
+    console.log('다음으로');
+  };
+
   return (
     <>
-      <MissionLayout>
+      <MessageSection>
         <MissionTitleBox>
           <ImageContainer>
-            <WishImage src="/public/img-wish-mission.svg" alt="감정분석가 위시" />
+            <WishImage src="/img-wish-mission.svg" alt="감정분석가 위시" />
           </ImageContainer>
 
           <MissionTextBox>
@@ -39,22 +49,16 @@ const EmotionMission = () => {
         </MissionTitleBox>
 
         <ButtonContainer>
-          <button>
+          <button onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
             남편과 함께 밤산책 하기
-            <img src={clickButton} alt="선택" onMouseEnter={handleHover} onMouseLeave={handleMouseLeave} />
+            <img src={clickButton} alt="선택" />
           </button>
         </ButtonContainer>
 
         <ButtonContainer>
-          <button>
-            남편과 함께 밤산책 하기
-            <img src={clickButton} alt="선택" onMouseEnter={handleHover} onMouseLeave={handleMouseLeave} />
-          </button>
-        </ButtonContainer>
-        <ButtonContainer>
-          <button>
-            남편과 함께 밤산책 하기
-            <img src={clickButton} alt="선택" onMouseEnter={handleHover} onMouseLeave={handleMouseLeave} />
+          <button onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
+            카페에서 따뜻한 차 마시며 대화하기
+            <img src={clickButton} alt="선택" />
           </button>
         </ButtonContainer>
 
@@ -63,8 +67,8 @@ const EmotionMission = () => {
           <br />
           배우자가 나에게 작성한 한마디를 확인 할 수 있어요
         </MissionExplanation>
-        <Button variant="primary" size="medium" text="분석 결과 보기" fixed={true} />
-      </MissionLayout>
+        <Button onClick={handleClick} type="submit" size="medium" text="분석 결과 보기" disabled={false} />
+      </MessageSection>
     </>
   );
 };
