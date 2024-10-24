@@ -19,6 +19,7 @@ interface IState {
 interface IAction {
   updateRecord: (field: string, value: string[]) => void;
   updateMessage: (toMe: string, toSpouse: string) => void;
+  reset: () => void;
 }
 
 const initialState: IState = {

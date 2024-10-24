@@ -16,7 +16,7 @@ import {
 } from './EmotionMessage.style';
 import fetchGPT from '@hooks/useGPT';
 import useAnalysisStore from '@store/useAnalysisStore';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EmotionMessage = () => {
   const emotionRecord = useEmotionStore((state) => state.record);
@@ -27,7 +27,8 @@ const EmotionMessage = () => {
   const [messageToMe, setMessageToMe] = useState<string>('');
   const [messageToSpouse, setMessageToSpouse] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
-  // const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   // 임시 데이터
   const isInfertility = true;
@@ -109,60 +110,68 @@ const EmotionMessage = () => {
     `;
 
     // GPT 호출
+    setIsLoading(true);
     const data = await fetchGPT(prompt, userInput, 'record');
     const dataToObj = JSON.parse(data.choices[0].message.content);
 
     updateAnalysis(dataToObj);
     updateStep(currentStep + 1);
-    // navigate()
+    navigate('/emotion/mission');
+    setIsLoading(false);
   };
 
   return (
-    <MessageSection>
-      <ProgressBar>
-        <DashedLine />
-      </ProgressBar>
-      <MessageContainer onSubmit={handleSubmit}>
-        <MessageItem>
-          <MessageTitle>
-            <ProfileImage gender="female" />
-            <TitleText>
-              <p>오늘의 나에게 한마디</p>
-              <p>사용자님에게 하루동안 보여지는 메시지예요</p>
-            </TitleText>
-          </MessageTitle>
-          <MessageArea>
-            <textarea
-              rows={2}
-              maxLength={50}
-              placeholder="50자 이내로 입력해주세요."
-              value={messageToMe}
-              onChange={(e) => handleInputChange(e, 'me')}
-            />
-          </MessageArea>
-        </MessageItem>
-        <MessageItem>
-          <MessageTitle second>
-            <ProfileImage gender="male" />
-            <TitleText>
-              <p>오늘의 남편에게 한마디</p>
-              <p>남편이 미션을 완료하면 볼 수 있는 메시지예요</p>
-            </TitleText>
-          </MessageTitle>
-          <MessageArea second>
-            <textarea
-              rows={2}
-              placeholder="50자 이내로 입력해주세요."
-              maxLength={50}
-              value={messageToSpouse}
-              onChange={(e) => handleInputChange(e, 'spouse')}
-            />
-          </MessageArea>
-        </MessageItem>
-        <pre>{`응원이 될 수 있는 한마디가 중요해요!\n가끔은 위시 한마디를 통해 농담을 보내봐도 좋아요`}</pre>
-        <Button text="보내기" disabled={isDisabled} type="submit" size="medium" />
-      </MessageContainer>
-    </MessageSection>
+    <>
+      {isLoading ? (
+        '로딩 중'
+      ) : (
+        <MessageSection>
+          <ProgressBar>
+            <DashedLine />
+          </ProgressBar>
+          <MessageContainer onSubmit={handleSubmit}>
+            <MessageItem>
+              <MessageTitle>
+                <ProfileImage gender="female" />
+                <TitleText>
+                  <p>오늘의 나에게 한마디</p>
+                  <p>사용자님에게 하루동안 보여지는 메시지예요</p>
+                </TitleText>
+              </MessageTitle>
+              <MessageArea>
+                <textarea
+                  rows={2}
+                  maxLength={50}
+                  placeholder="50자 이내로 입력해주세요."
+                  value={messageToMe}
+                  onChange={(e) => handleInputChange(e, 'me')}
+                />
+              </MessageArea>
+            </MessageItem>
+            <MessageItem>
+              <MessageTitle second>
+                <ProfileImage gender="male" />
+                <TitleText>
+                  <p>오늘의 남편에게 한마디</p>
+                  <p>남편이 미션을 완료하면 볼 수 있는 메시지예요</p>
+                </TitleText>
+              </MessageTitle>
+              <MessageArea second>
+                <textarea
+                  rows={2}
+                  placeholder="50자 이내로 입력해주세요."
+                  maxLength={50}
+                  value={messageToSpouse}
+                  onChange={(e) => handleInputChange(e, 'spouse')}
+                />
+              </MessageArea>
+            </MessageItem>
+            <pre>{`응원이 될 수 있는 한마디가 중요해요!\n가끔은 위시 한마디를 통해 농담을 보내봐도 좋아요`}</pre>
+            <Button text="보내기" disabled={isDisabled} type="submit" size="medium" />
+          </MessageContainer>
+        </MessageSection>
+      )}
+    </>
   );
 };
 
