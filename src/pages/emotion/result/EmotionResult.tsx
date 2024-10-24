@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
+import useAnalysisStore from '@store/useAnalysisStore';
 import variables from '@styles/Variables';
-import React from 'react';
+import EmotionGraph from './EmotionGraph';
+import EmotionStress from './EmotionStress';
 
 export const ResultSection = styled.section`
   height: 100%;
@@ -57,6 +59,10 @@ export const EmotionGraphContainer = styled.div`
 `;
 
 const EmotionResult = () => {
+  const analysisResult = useAnalysisStore((state) => state.analysis);
+
+  console.log(analysisResult.keywords);
+
   return (
     <>
       <ResultSection>
@@ -69,14 +75,14 @@ const EmotionResult = () => {
         </ResultTitleBox>
 
         <EmotionGraphContainer>
-          <div>감정분포도 자리</div>
-          <div>키워드 자리</div>
+          <EmotionGraph />
+          <div>{analysisResult.keywords.map((v) => v)}</div>
         </EmotionGraphContainer>
         <ResultTextBox>
           <pre>난임 스트레스 예상점수</pre>
         </ResultTextBox>
         <EmotionGraphContainer>
-          <div>예상점수 자리</div>
+          <EmotionStress />
           <div>예상 분포도 자리</div>
         </EmotionGraphContainer>
       </ResultSection>
