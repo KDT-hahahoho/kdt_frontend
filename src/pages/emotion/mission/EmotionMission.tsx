@@ -39,7 +39,7 @@ const EmotionMission = () => {
       <MessageSection>
         <MissionTitleBox>
           <ImageContainer>
-            <WishImage src="/public/img-wish-mission.svg" alt="감정분석가 위시" />
+            <WishImage src="/img-wish-mission.svg" alt="감정분석가 위시" />
           </ImageContainer>
 
           <MissionTextBox>
