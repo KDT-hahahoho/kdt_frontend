@@ -12,15 +12,20 @@ import {
 } from './EmotionMission.style';
 import Button from '@components/common/Button';
 import { useNavigate } from 'react-router-dom';
+import useAnalysisStore from '@store/useAnalysisStore';
 
 const EmotionMission = () => {
   const [clickButton, setClickButton] = useState('/src/assets/Images/invaildGray.svg');
   const [, setIsClicked] = useState(false);
   const navigate = useNavigate();
+  const analysisResult = useAnalysisStore((state) => state.analysis);
+  const currentStep = useAnalysisStore((state) => state.step);
 
   const handleHover = () => {
     setClickButton('/src/assets/Images/valid.svg');
     console.log('클릭');
+    console.log(currentStep);
+    console.log(analysisResult);
   };
 
   const handleMouseLeave = () => {
