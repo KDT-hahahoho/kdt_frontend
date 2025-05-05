@@ -7,16 +7,16 @@ import OurKeyword from '@components/home/OurKeyword';
 import CoupleReport from '@components/home/CoupleReport';
 import OurReport from '@components/home/OurReport';
 import useAuthRedirect from '@hooks/useAuthRedirect';
-import { useGetCoupleData } from '@hooks/useGetCoupleData';
+import { coupleDataRes } from '@data/couple';
+// import { useGetCoupleData } from '@hooks/useGetCoupleData';
 
 const Home = () => {
-  const token = localStorage.getItem('authToken') || '';
+  // const token = localStorage.getItem('authToken') || '';
   const redirect = useAuthRedirect(); // 인가 확인 훅
-  const { data: coupleData } = useGetCoupleData(token);
+  // const { data: coupleData } = useGetCoupleData(token);
+  const coupleData = coupleDataRes;
 
   if (redirect) return redirect; // 인증되지 않으면 리디렉션을 반환
-
-  console.log('home에서 데이터 호출 ', coupleData);
 
   return (
     <HomepageContainer>
@@ -40,10 +40,10 @@ const HomepageContainer = styled.div`
 
 const ContentWrapper = styled.div`
   flex: 1;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   padding-bottom: 1rem;
   -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* scrollbar-width: none; */
 `;
 
 export default Home;

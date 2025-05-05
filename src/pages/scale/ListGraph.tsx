@@ -17,6 +17,10 @@ const ListGraph = ({ data }: { data: ScaleData[] }) => {
       containLabel: true,
     },
 
+    tooltip: {
+      trigger: 'axis',
+    },
+
     xAxis: {
       type: 'category',
       data: dataList.map((scale: ScaleData) => scale.created_at!.split('T')[0].slice(5).split('-').join('.')),
@@ -47,7 +51,7 @@ const ListGraph = ({ data }: { data: ScaleData[] }) => {
 
     series: [
       {
-        name: 'total',
+        name: '점수',
         type: 'bar',
         barWidth: 16,
         cursor: 'default',
@@ -76,7 +80,7 @@ const ListGraph = ({ data }: { data: ScaleData[] }) => {
 export default ListGraph;
 
 const TypeSection = css`
-  border: 0.1rem solid ${variables.colors.gray5};
+  border: 1px solid ${variables.colors.primarySoft};
   box-shadow: ${variables.BoxShadow};
   border-radius: 1rem;
   padding: 2.2rem;

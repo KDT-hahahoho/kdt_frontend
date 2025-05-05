@@ -124,7 +124,7 @@ const OurKeywordLineChartContainer = styled.div`
   height: 20rem;
   border: 1px solid ${variables.colors.gray50};
   border-radius: ${variables.borderRadius};
-  margin-top: 4.2rem;
+  margin-top: 3rem;
   padding: 0 1.3rem;
 `;
 

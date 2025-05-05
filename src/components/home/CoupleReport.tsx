@@ -120,7 +120,7 @@ const CoupleReport = ({ coupleData }: CoupleReportProps) => {
     ],
   };
 
-  console.log(coupleData?.result);
+  // console.log(coupleData?.result);
 
   return (
     <CoupleReportContainer>
@@ -190,7 +190,7 @@ const ToggleContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   border: 1px solid #d3d3d3;
-  width: 9rem;
+  width: 10rem;
   height: 3rem;
   border-radius: 2rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -204,7 +204,7 @@ const ToggleOption = styled.div<ToggleOptionProps>`
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: ${({ isSelected }) => (isSelected ? '#B691FF' : '#6e6e6e')};
   background-color: ${({ isSelected }) => (isSelected ? '#efe6fa' : 'transparent')};
   transition:
@@ -241,10 +241,10 @@ const CoupleReportTitleDes = styled.p`
 
 const CoupleReportLineChartContainer = styled.div`
   width: 100%;
-  margin-bottom: 5rem;
+  margin-bottom: 11rem;
   border: 1px solid ${variables.colors.gray50};
   border-radius: ${variables.borderRadius};
-  margin-top: 4.2rem;
+  margin-top: 3rem;
   padding: 0 1.3rem;
 `;
 

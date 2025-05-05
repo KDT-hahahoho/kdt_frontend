@@ -39,7 +39,8 @@ const CounselingListItem = ({
     <div css={RecordItem} onClick={() => navigate(`/counseling/${item.id}`)}>
       <div css={ItemLeft} className="left">
         <p>
-          최근 상담 <span className="upDate">{consultationDate}</span>
+          <span className="upDate">{consultationDate} </span>
+          {item.summary}
         </p>
 
         <div className="tags">
@@ -65,8 +66,9 @@ const RecordItem = css`
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  padding: 1.8rem 2.4rem;
-  border: 0.1rem solid ${variables.colors.gray10};
+  gap: 0.6rem;
+  padding: 1.8rem;
+  border: 1px solid ${variables.colors.gray10};
   box-shadow: 0 0 1rem ${variables.colors.gray10};
   border-radius: 1.2rem;
   color: ${variables.colors.gray100};
@@ -77,25 +79,48 @@ const ItemLeft = css`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  p {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
   .upDate {
-    margin-left: 0.8rem;
+    color: ${variables.colors.gray70};
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &:after {
+      content: '';
+      width: 1px;
+      height: 1rem;
+      background: ${variables.colors.gray50};
+    }
   }
 
   .tags {
     display: flex;
-    gap: 1rem;
+    gap: 0.6rem;
     color: ${variables.colors.primaryStrong};
     & span {
-      padding: 0.4rem 1.4rem;
+      padding: 0.4rem 1.2rem;
       border-radius: 1.5rem;
       border: 0.1rem solid ${variables.colors.primarySoft};
+      font-size: 1.2rem;
     }
   }
 `;
 
 const ItemRight = css`
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
+
+  & p {
+    opacity: 0.5;
+  }
 
   & button {
     display: block;

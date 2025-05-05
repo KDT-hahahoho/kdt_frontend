@@ -2,7 +2,7 @@
 import Button from '@components/common/Button';
 import { css } from '@emotion/react';
 import variables from '@styles/Variables';
-import axios from 'axios';
+// import axios from 'axios';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import fetchGPT from '../../hooks/useGPT';
@@ -11,26 +11,27 @@ import sendIcon from '/img/icon-send.svg';
 import wishIcon from '/img/icon-wish-profile.svg';
 import PageTitle from '@components/common/PageTitle';
 import TypingEffect from '@hooks/useTyping';
+import { counselsRecordsRes } from '@data/counsels';
 
 interface Message {
   sender?: string;
   message?: string;
 }
 
-interface CounselData {
-  member_id: number;
-  summary: string;
-  tags: string;
-  count: number;
-}
+// interface CounselData {
+//   member_id: number;
+//   summary: string;
+//   tags: string;
+//   count: number;
+// }
 
 const Counseling = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const member_id = Number(localStorage.getItem('MemberId'));
+  // const member_id = Number(localStorage.getItem('MemberId'));
   const scrollBoxRef = useRef<HTMLDivElement>(null);
 
-  const [scaleData, setScaleData] = useState({ total: 0, belifs: '' });
+  // const [scaleData, setScaleData] = useState({ total: 0, belifs: '' });
   const [previousCounsel, setPreviousCounsel] = useState({ summary: '', tags: '', count: 1 });
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState('');
@@ -41,8 +42,8 @@ const Counseling = () => {
 
   const userData = {
     name: localStorage.getItem('userName'),
-    total: `${scaleData.total}/230`,
-    belifs: scaleData.belifs,
+    total: `100/230`,
+    belifs: '아이를 갖기 위해서는 무엇이라도 할 것이다, 친구와 가족이 나와 거리를 두는 것 같다',
   };
 
   const prompt = `
@@ -115,8 +116,6 @@ const Counseling = () => {
       caseFoumulation,
     });
     setIsLoading(false);
-
-    console.log(dataForPrompt.summary, lastMsg);
   };
 
   //상담 시작 날짜 가져오는 함수
@@ -132,53 +131,53 @@ const Counseling = () => {
   const now = new Date();
   const toDay = formatDate(now);
 
-  const fetchPreviousCounsel = async (id: string) => {
-    try {
-      const { data } = await axios.get(`https://www.wishkr.site/counsels/records/${id}`, {
-        headers: {
-          'content-type': 'application/json',
-          accept: 'application/json',
-        },
-      });
-      setPreviousCounsel({ summary: data.result.summary, tags: data.result.tags, count: data.result.count + 1 });
-      return data.result;
-    } catch (err) {
-      console.error('Failed to POST scaleList: ', err);
-      return null;
-    }
-  };
+  // const fetchPreviousCounsel = async (id: string) => {
+  //   try {
+  //     const { data } = await axios.get(`https://www.wishkr.site/counsels/records/${id}`, {
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         accept: 'application/json',
+  //       },
+  //     });
+  //     setPreviousCounsel({ summary: data.result.summary, tags: data.result.tags, count: data.result.count + 1 });
+  //     return data.result;
+  //   } catch (err) {
+  //     console.error('Failed to POST scaleList: ', err);
+  //     return null;
+  //   }
+  // };
 
-  const fetchScaleData = async () => {
-    try {
-      const { data } = await axios.get('https://www.wishkr.site/infertility/tests/', {
-        params: { memberId: member_id },
-        headers: {
-          'content-type': 'application/json',
-          accept: 'application/json',
-        },
-      });
-      setScaleData({ total: data.result.totalTests[0].total, belifs: data.result.totalTests[0].belifs });
-      return data.result.totalTests[0];
-    } catch (err) {
-      console.error('Failed to POST scaleList: ', err);
-      return null;
-    }
-  };
+  // const fetchScaleData = async () => {
+  //   try {
+  //     const { data } = await axios.get('https://www.wishkr.site/infertility/tests/', {
+  //       params: { memberId: member_id },
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         accept: 'application/json',
+  //       },
+  //     });
+  //     // setScaleData({ total: data.result.totalTests[0].total, belifs: data.result.totalTests[0].belifs });
+  //     return data.result.totalTests[0];
+  //   } catch (err) {
+  //     console.error('Failed to POST scaleList: ', err);
+  //     return null;
+  //   }
+  // };
 
-  const fetchCounselResult = async (body: CounselData) => {
-    try {
-      const response = await axios.post('https://www.wishkr.site/counsels/records/', body, {
-        headers: {
-          'content-type': 'application/json',
-          accept: 'application/json',
-        },
-      });
-      return response;
-    } catch (err) {
-      console.error('Failed to POST scaleList: ', err);
-      return null;
-    }
-  };
+  // const fetchCounselResult = async (body: CounselData) => {
+  //   try {
+  //     const response = await axios.post('https://www.wishkr.site/counsels/records/', body, {
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         accept: 'application/json',
+  //       },
+  //     });
+  //     return response;
+  //   } catch (err) {
+  //     console.error('Failed to POST scaleList: ', err);
+  //     return null;
+  //   }
+  // };
 
   const handleConsultationEnd = async () => {
     const prompt = `답변 형식: {"summary": "내용", "tags": "#태그1#태그2#태그3"}
@@ -188,9 +187,9 @@ const Counseling = () => {
         - 사용자가 언급한 단어 위주로 태그를 나열해줘.
     `;
     const response = await fetchGPT(prompt, dataForPrompt.summary);
-    const { summary, tags } = JSON.parse(response.choices[0].message.content);
-    const fetchRes = await fetchCounselResult({ member_id, summary, tags, count: previousCounsel.count || 1 });
-    if (fetchRes && fetchRes.status === 201) setModal(true);
+    // const { summary, tags } = JSON.parse(response.choices[0].message.content);
+    // const fetchRes = await fetchCounselResult({ member_id, summary, tags, count: previousCounsel.count || 1 });
+    if (response) setModal(true);
   };
 
   //가이드 영역
@@ -224,8 +223,12 @@ const Counseling = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (params.id) fetchPreviousCounsel(params.id);
-    fetchScaleData();
+    // if (params.id) fetchPreviousCounsel(params.id);
+    if (params.id) {
+      const data = counselsRecordsRes.result.totalRecords[+params.id - 1];
+      setPreviousCounsel({ summary: data.summary, tags: data.tags, count: data.count + 1 });
+    }
+    // fetchScaleData();
   }, []);
 
   return (
@@ -262,7 +265,10 @@ const Counseling = () => {
                 {previousCounsel.tags && (
                   <p>
                     이전 상담 내용은 다음과 같아요. <br />
-                    {previousCounsel.tags.split('#').join(' #')}
+                    <span>
+                      {previousCounsel.summary} <br />
+                      {previousCounsel.tags.split('#').join(' #')}
+                    </span>
                   </p>
                 )}
               </div>
@@ -381,6 +387,12 @@ const MessageBox = css`
     p {
       padding: 1.4rem 2.2rem;
       max-width: 27rem;
+
+      span {
+        display: block;
+        margin-top: 0.6rem;
+        font-weight: 500;
+      }
     }
   }
 
@@ -412,7 +424,7 @@ const MessageBox = css`
     margin-left: auto;
     border-radius: 2rem 2rem 0 2rem;
     background-color: ${variables.colors.white};
-    box-shadow: 0 0 0.5rem rgba(217, 203, 245, 0.15);
+    box-shadow: 0 0 0.5rem rgba(217, 203, 245, 0.3);
   }
 `;
 

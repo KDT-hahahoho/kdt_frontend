@@ -89,7 +89,7 @@ const CounselingGuide = ({
   return (
     <>
       <button css={StepLayer} onClick={handleStep} type="button">
-        <button className="skip">건너뛰기</button>
+        <span className="skip">건너뛰기</span>
       </button>
       <div css={[GuideDim, guideVisible ? FadeInAni : FadeOutAni]}>
         <div css={[end, [step === 3 && Priority]]}>종료</div>

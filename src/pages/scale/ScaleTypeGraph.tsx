@@ -74,15 +74,14 @@ const ScaleTypeGraph = ({
     },
     xAxis: {
       type: 'value',
-      boundaryGap: [0, 0.01],
-      max: 60,
+      max: 36,
       axisLabel: {
         show: false,
       },
       axisTick: {
         show: false,
       },
-      interval: 5,
+      interval: 6,
     },
     yAxis: {
       show: false,
@@ -103,9 +102,9 @@ const ScaleTypeGraph = ({
         itemStyle: {
           color: `${variables.colors.gray50}`,
           borderRadius: [0, 5, 5, 0],
-          emphasis: {
-            color: `${variables.colors.gray50}`,
-          },
+        },
+        labelLine: {
+          show: true,
         },
         data: [
           `${beforeTest?.social}`,
@@ -122,11 +121,8 @@ const ScaleTypeGraph = ({
         barCategoryGap: '50%',
         cursor: 'default',
         itemStyle: {
-          color: `${variables.colors.primaryStrong}`,
+          color: `${variables.colors.primary}`,
           borderRadius: [0, 5, 5, 0],
-          emphasis: {
-            color: `${variables.colors.primaryStrong}`,
-          },
         },
         data: [
           `${currentTest?.social}`,

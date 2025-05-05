@@ -7,12 +7,13 @@ import { handleValidation } from '@utils/validation/handleValidation';
 import Button from '@components/common/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import variables from '@styles/Variables';
-import axios from 'axios';
+// import axios from 'axios';
 import useAuthStore from '@store/useAuthStore';
+import { userRes } from '@data/user';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('test2@test.com');
+  const [password, setPassword] = useState('test1234');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const emailStatus = handleValidation('email', email);
@@ -31,35 +32,36 @@ const LoginPage = () => {
 
     // 로그인 API 호출
     try {
-      const response = await axios.post('https://www.wishkr.site/accounts/login/', { email, password });
+      // const response = await axios.post('https://www.wishkr.site/accounts/login/', { email, password });
 
-      if (response.status === 200) {
-        console.log('Login successful:', response.data);
-        const token = response.data.result.token;
-        const Email = response.data.result.email;
-        const MemberId = response.data.result.memberId;
-        const userName = response.data.result.username;
-        const Gender = response.data.result.gender;
-        const is_infertility = response.data.result.is_infertility;
+      const response = userRes;
 
-        const connect = 'false';
-        console.log(token);
+      console.log('Login successful:', response.data);
+      const token = response.data.result.token;
+      const Email = response.data.result.email;
+      const MemberId = response.data.result.memberId;
+      const userName = response.data.result.username;
+      const Gender = response.data.result.gender;
+      const is_infertility = response.data.result.is_infertility;
 
-        // zustand 상태에 로그인 정보 저장
-        // 로컬 스토리지에도 로그인 정보 저장
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('userEmail', Email);
-        localStorage.setItem('MemberId', MemberId);
-        localStorage.setItem('userName', userName);
-        localStorage.setItem('Gender', Gender);
-        localStorage.setItem('connect', connect);
-        localStorage.setItem('is_infertility', is_infertility);
+      const connect = 'false';
+      console.log(token);
 
-        setAuthState(token, Email, MemberId, userName);
+      // zustand 상태에 로그인 정보 저장
+      // 로컬 스토리지에도 로그인 정보 저장
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userEmail', Email);
+      localStorage.setItem('MemberId', MemberId + '');
+      localStorage.setItem('userName', userName);
+      localStorage.setItem('Gender', Gender);
+      localStorage.setItem('connect', connect);
+      localStorage.setItem('is_infertility', is_infertility + '');
 
-        // 홈 페이지로 이동
-        navigate('/home');
-      }
+      setAuthState(token, Email, MemberId + '', userName);
+
+      // 홈 페이지로 이동
+      navigate('/home');
+      // if (response.status === 200) console.log('테스트 로그인을 위해 로직 분리');
     } catch (error) {
       setErrorMessage('이메일 또는 비밀번호가 유효하지 않습니다.');
       console.error('Login failed:', error);
