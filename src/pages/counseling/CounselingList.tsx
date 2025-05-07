@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import Button from '@components/common/Button';
 import { css } from '@emotion/react';
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CounselingListItem from './CounselingListItem';
 import noRecord from '/img/no-counseling-record.svg';
 import PageTitle from '@components/common/PageTitle';
+import { counselsRecordsRes } from '@data/counsels';
 
 export interface CounselingListData {
   id: number;
@@ -18,32 +19,33 @@ export interface CounselingListData {
   member_id: number;
 }
 
-const COUNSELINGLIST_URL = 'https://www.wishkr.site/counsels/records/';
+// const COUNSELINGLIST_URL = 'https://www.wishkr.site/counsels/records/';
 
 const CounselingList = () => {
   const [counselingRecord, setCounselingRecord] = useState<CounselingListData[]>([]);
-  const id = localStorage.getItem('MemberId');
+  // const id = localStorage.getItem('MemberId');
   const navigate = useNavigate();
 
-  const fetchCounselingData = async (): Promise<CounselingListData | undefined> => {
-    try {
-      const res = await axios.get(`${COUNSELINGLIST_URL}?member_id=${id}`, {
-        headers: {
-          'content-type': 'application/json',
-          accept: 'application/json',
-        },
-      });
+  // const fetchCounselingData = async (): Promise<CounselingListData | undefined> => {
+  //   try {
+  //     const res = await axios.get(`${COUNSELINGLIST_URL}?member_id=${id}`, {
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         accept: 'application/json',
+  //       },
+  //     });
 
-      console.log(res.data.result.totalRecords);
-      if (res.status === 200) setCounselingRecord(res.data.result.totalRecords);
-    } catch (err) {
-      console.error(err);
-      return undefined;
-    }
-  };
+  //     console.log(res.data.result.totalRecords);
+  //     if (res.status === 200) setCounselingRecord(res.data.result.totalRecords);
+  //   } catch (err) {
+  //     console.error(err);
+  //     return undefined;
+  //   }
+  // };
 
   useEffect(() => {
-    fetchCounselingData();
+    // fetchCounselingData();
+    setCounselingRecord(counselsRecordsRes.result.totalRecords);
   }, []);
 
   const counselingRecordItem = counselingRecord?.map((item) => (
@@ -79,7 +81,6 @@ const CounselingListWrapper = css`
   min-height: calc(100vh - 4rem);
   display: flex;
   flex-direction: column;
-  // box-shadow: inset 0 0 10px saddlebrown;
 `;
 
 const NoRecordCover = css`

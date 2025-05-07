@@ -102,7 +102,8 @@ const Testing = () => {
         const gptData = await fetchGPT(prompt, JSON.stringify(formData));
         const belifs = gptData.choices[0].message.content;
         const response = await fetchTestResult({ ...result, member_id, belifs });
-        if (response) navigate(`/scale/${response.data.result.id}`);
+        console.log(response);
+        navigate(`/scale/1`);
       }
     },
     [currentStep]

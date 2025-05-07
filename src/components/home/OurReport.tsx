@@ -82,14 +82,14 @@ const OurReport = ({ coupleData }: OurReportProps) => {
 
   useEffect(() => {
     if (coupleData?.result?.my_inf_tests?.[0] && coupleData?.result?.spouse_inf_tests?.[0]) {
-      const categories = ['1', '2', '3', '4', '5', '6'];
+      const categories = ['필요성', '거부감', '관계성', '성역할', '사회성'];
       const myData = [
         coupleData.result.my_inf_tests[0].essential,
         coupleData.result.my_inf_tests[0].refusing,
         coupleData.result.my_inf_tests[0].relational,
         coupleData.result.my_inf_tests[0].sexual,
         coupleData.result.my_inf_tests[0].social,
-        coupleData.result.my_inf_tests[0].total,
+        // coupleData.result.my_inf_tests[0].total,
       ];
       const spouseData = [
         coupleData.result.spouse_inf_tests[0].essential,
@@ -97,7 +97,7 @@ const OurReport = ({ coupleData }: OurReportProps) => {
         coupleData.result.spouse_inf_tests[0].relational,
         coupleData.result.spouse_inf_tests[0].sexual,
         coupleData.result.spouse_inf_tests[0].social,
-        coupleData.result.spouse_inf_tests[0].total,
+        // coupleData.result.spouse_inf_tests[0].total,
       ];
 
       setTestDone(true);
@@ -119,7 +119,7 @@ const OurReport = ({ coupleData }: OurReportProps) => {
         },
         yAxis: { type: 'value' },
         grid: {
-          top: '-23px',
+          top: '40px',
         },
         series: [
           { name: '본인', data: myData, type: 'line', color: variables.colors.primary },
@@ -136,7 +136,7 @@ const OurReport = ({ coupleData }: OurReportProps) => {
       {testdone ? (
         <OurReportLineChartContainer>
           <ChartDescription>스트레스 척도</ChartDescription>
-          <EChartsReact option={options} style={{ width: '100%', height: '100%' }} />
+          <EChartsReact option={options} style={{ width: '100%', height: '28rem', marginBottom: '-2rem' }} />
         </OurReportLineChartContainer>
       ) : (
         <>
@@ -189,10 +189,10 @@ const OurReportTitleDes = styled.p`
 
 const OurReportLineChartContainer = styled.div`
   width: 100%;
-  height: 28rem;
+  /* height: 28rem; */
   border: 1px solid ${variables.colors.gray50};
   border-radius: ${variables.borderRadius};
-  margin-top: 4.2rem;
+  margin-top: 3rem;
   padding: 0 1.3rem;
 `;
 
