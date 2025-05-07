@@ -3,15 +3,16 @@ import Button from '@components/common/Button';
 import { css } from '@emotion/react';
 import variables from '@styles/Variables';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { ScaleData } from './ScaleList';
 import ScaleTotalGraph from './ScaleTotalGraph';
 import ScaleTypeGraph from './ScaleTypeGraph';
 import PageTitle from '@components/common/PageTitle';
+import { infertilityTestsRes } from '@data/infertility';
 
-const SCALEDATA_URL = 'https://www.wishkr.site/infertility/tests/';
+// const SCALEDATA_URL = 'https://www.wishkr.site/infertility/tests/';
 
 interface ScaleResponse {
   before_test: ScaleData;
@@ -21,30 +22,31 @@ interface ScaleResponse {
 const ScaleResult = () => {
   const [scaleData, setScaleData] = useState<ScaleResponse>();
   const userName = localStorage.getItem('userName');
-  const params = useParams();
+  // const params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const hasInURL = location.pathname.includes('list');
-  const memeberId = localStorage.getItem('MemberId');
+  // const memeberId = localStorage.getItem('MemberId');
 
-  const fetchScaleData = async (): Promise<ScaleData | undefined> => {
-    try {
-      const res = await axios.get(`${SCALEDATA_URL}${params.id}/`, {
-        params: { member_id: memeberId },
-        headers: {
-          'content-type': 'application/json',
-          accept: 'application/json',
-        },
-      });
-      if (res.status === 200) setScaleData(res.data.result);
-    } catch (err) {
-      console.error(err);
-      return undefined;
-    }
-  };
+  // const fetchScaleData = async (): Promise<ScaleData | undefined> => {
+  //   try {
+  //     const res = await axios.get(`${SCALEDATA_URL}${params.id}/`, {
+  //       params: { member_id: memeberId },
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         accept: 'application/json',
+  //       },
+  //     });
+  //     if (res.status === 200) setScaleData(res.data.result);
+  //   } catch (err) {
+  //     console.error(err);
+  //     return undefined;
+  //   }
+  // };
 
   useEffect(() => {
-    fetchScaleData();
+    // fetchScaleData();
+    setScaleData(infertilityTestsRes.result);
   }, []);
 
   const ListTitle = css`

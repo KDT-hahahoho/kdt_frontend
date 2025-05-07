@@ -102,8 +102,8 @@ const FooterContainer = styled.footer`
   bottom: 0;
   max-width: 50rem;
   width: 100%;
-  margin: calc(-1 * ${variables.layoutPadding});
-  height: 10rem;
+  margin: 0 calc(-1 * ${variables.layoutPadding});
+  height: 7rem;
   background-color: ${variables.colors.white};
   display: flex;
   justify-content: center;
@@ -128,17 +128,19 @@ const FooterItem = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const FooterIcon = styled.img`
-  width: 2.4rem;
-  height: 2.4rem;
-  transition: filter 0.3s ease;
 
   &:hover,
   &:focus {
-    filter: brightness(0.6) sepia(1) hue-rotate(200deg);
+    img {
+      filter: brightness(0.6) sepia(1) hue-rotate(200deg);
+    }
   }
+`;
+
+const FooterIcon = styled.img`
+  width: 2rem;
+  aspect-ratio: 1/1;
+  transition: filter 0.3s ease;
 `;
 
 const StyledLink = styled(Link)`

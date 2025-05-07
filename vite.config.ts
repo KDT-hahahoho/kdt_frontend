@@ -46,6 +46,7 @@ export default defineConfig({
       { find: '@features', replacement: '/src/features' },
       { find: '@utils', replacement: '/src/utils' },
       { find: '@router', replacement: '/src/router' },
+      { find: '@data', replacement: '/src/data' },
     ],
   },
 });

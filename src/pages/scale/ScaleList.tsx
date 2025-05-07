@@ -2,12 +2,13 @@
 import Button from '@components/common/Button';
 import { css } from '@emotion/react';
 import variables from '@styles/Variables';
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ListGraph from './ListGraph';
 import noRecord from '/img/no-counseling-record.svg';
 import PageTitle from '@components/common/PageTitle';
+import { scaleListRes } from '@data/scaleList';
 
 export interface Scale {
   total: number;
@@ -25,30 +26,31 @@ export interface ScaleData extends Scale {
 }
 
 const ScaleList = () => {
-  const memberId = Number(localStorage.getItem('MemberId'));
-  const [data, setData] = useState<ScaleData[] | null>();
+  // const memberId = Number(localStorage.getItem('MemberId'));
+  const [data, setData] = useState<ScaleData[] | null>(null);
 
-  const fetchScaleList = async (): Promise<ScaleData | null> => {
-    try {
-      const { data } = await axios.get('https://www.wishkr.site/infertility/tests', {
-        params: { memberId },
-        headers: {
-          'content-type': 'application/json',
-          accept: 'application/json',
-        },
-      });
-      if (data) {
-        setData(data.result.totalTests);
-        return data.result.totalTests;
-      } else {
-        setData(null);
-        return null;
-      }
-    } catch (err) {
-      console.error('Failed to fetch scaleList: ', err);
-      return null;
-    }
-  };
+  // const fetchScaleList = async (): Promise<ScaleData | null> => {
+  //   try {
+  //     const { data } = await axios.get('https://www.wishkr.site/infertility/tests', {
+  //       params: { memberId },
+  //       headers: {
+  //         'content-type': 'application/json',
+  //         accept: 'application/json',
+  //       },
+  //     });
+
+  //     if (data) {
+  //       setData(data.result.totalTests);
+  //       return data.result.totalTests;
+  //     } else {
+  //       setData(null);
+  //       return null;
+  //     }
+  //   } catch (err) {
+  //     console.error('Failed to fetch scaleList: ', err);
+  //     return null;
+  //   }
+  // };
 
   const navigate = useNavigate();
   const [showModal, setModal] = useState(false);
@@ -68,7 +70,8 @@ const ScaleList = () => {
   };
 
   useEffect(() => {
-    fetchScaleList();
+    // fetchScaleList();
+    setData(scaleListRes.result.totalTests);
   }, []);
 
   return (
@@ -77,7 +80,7 @@ const ScaleList = () => {
         titleText="난임 스트레스 검사 기록"
         textAlign="center"
         pageBack={false}
-        isFixed={false}
+        isFixed={true}
         backcolor="#fff"
       />
 
@@ -162,6 +165,10 @@ const ScaleChart = css`
   background-color: ${variables.colors.white};
   padding: 2rem ${variables.layoutPadding} 2.5rem;
   box-shadow: 0 1rem 1.25rem rgba(217, 217, 217, 0.5);
+  position: sticky;
+  top: 6rem;
+  margin-top: 6rem;
+  z-index: 1;
 
   .chart {
     .desc {
@@ -199,6 +206,7 @@ const ScaleLists = css`
     padding: 0 2.4rem;
     border-radius: 1.2rem;
     box-shadow: 0 0 1rem ${variables.colors.gray10};
+    border: 1px solid ${variables.colors.gray10};
     transition: box-shadow ${variables.TransitionDuration};
     &:hover {
       box-shadow: 0 0 1rem ${variables.colors.gray50};

@@ -6,7 +6,7 @@ const HomePageTitle = () => {
   const userName = localStorage.getItem('userName');
 
   const alternateTexts = [
-    '오늘하루는 어떠셨나요?',
+    '오늘 하루는 어떠셨나요?',
     '기분 좋은 하루였나요?',
     '멋진 하루를 보내셨나요?',
     '행복한 하루를 만드셨나요?',
@@ -17,7 +17,7 @@ const HomePageTitle = () => {
 
   return (
     <PageTitle>
-      {userName ? userName : 'Guest'} 님 {randomText}
+      {userName ? userName : 'Guest'}님, {randomText}
     </PageTitle>
   );
 };

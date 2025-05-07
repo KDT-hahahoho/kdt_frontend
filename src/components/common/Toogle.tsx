@@ -42,7 +42,7 @@ const ToggleOption = styled.div<ToggleOptionProps>`
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: ${({ isSelected }) => (isSelected ? '#B691FF' : '#6e6e6e')};
   background-color: ${({ isSelected }) => (isSelected ? '#efe6fa' : 'transparent')};
   transition:

@@ -4,10 +4,11 @@ import profileImgWomen from '@assets/Images/mainFemaleProfile.svg';
 import profileImgMan from '@assets/Images/mainManProfile.svg';
 import mainlock from '@assets/Images/mainlock.svg';
 import { useNavigate } from 'react-router-dom';
-import { useCoupleInfo } from '@hooks/useCoupleInfo';
+// import { useCoupleInfo } from '@hooks/useCoupleInfo';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CoupleMissionWeekly from './CoupleMissionWeekly';
+import { coupleRes } from '@data/couple';
 
 // TODO : 미션 등록 이번주 미션 해야함
 interface InfTest {
@@ -44,7 +45,8 @@ const CoupleInformation = ({ coupleData }: OurReportProps) => {
   const [mission, setMission] = useState('');
   // isMissionDone 초기값을 서버 데이터와 동기화
   const [isMissionDone, setIsMissionDone] = useState(false);
-  const { partnerName, myName, gender, isConnected } = useCoupleInfo();
+  // const { partnerName, myName, gender, isConnected } = useCoupleInfo();
+  const { partnerName, myName, gender, isConnected } = coupleRes.result;
   const myMissionCompleted = coupleData?.result?.my_emotion?.is_complement || false;
   const spouseMissionCompleted = coupleData?.result?.spouse_emotion?.is_complement || false;
   const spouseExportMessage = coupleData?.result?.spouse_emotion?.export_message || '';

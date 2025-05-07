@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import variables from '@styles/Variables';
-import fetchMissionStatusWeekly from '@hooks/useCheckMissionStatus';
+// import fetchMissionStatusWeekly from '@hooks/useCheckMissionStatus';
 import { useEffect, useState } from 'react';
+import { emotionMissionsRes } from '@data/emotions';
 
 type DotStatus = 'bothCompleted' | 'oneCompleted' | 'locked';
 
@@ -26,7 +27,8 @@ const CoupleMissionWeekly = () => {
     const MemberId = localStorage.getItem('MemberId');
     if (MemberId) {
       const fetchStatus = async () => {
-        const data = await fetchMissionStatusWeekly(MemberId);
+        // const data = await fetchMissionStatusWeekly(MemberId);
+        const data = emotionMissionsRes;
         if (data) {
           setWeeklyStatus(data);
         }

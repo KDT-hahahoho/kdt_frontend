@@ -16,8 +16,8 @@ const EmotionStressBefore = ({
   const analysisResult = useAnalysisStore((state) => state.analysis);
   const value = total * 0.5;
 
-  console.log(analysisResult);
-  console.log(total);
+  // console.log(analysisResult);
+  // console.log(total);
 
   const [options] = useState({
     tooltip: {
