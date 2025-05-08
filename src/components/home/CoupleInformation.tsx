@@ -125,7 +125,7 @@ const CoupleInformation = ({ coupleData }: OurReportProps) => {
         <PersonalCard>
           <CardImage src={gender === 'M' ? profileImgMan : profileImgWomen} alt="User Image" />
           <CardName>{myName}</CardName>
-          <EmotionAnalysis>감정 분석 필요</EmotionAnalysis>
+          <EmotionAnalysis>미션 완료</EmotionAnalysis>
         </PersonalCard>
         <SpouseCard
           onClick={() => {
@@ -137,7 +137,7 @@ const CoupleInformation = ({ coupleData }: OurReportProps) => {
             alt="Spouse Image"
           />
           <CardName>{partnerName || '배우자 이름'}</CardName>
-          <EmotionAnalysis>{partnerName ? '감정분석 필요' : '연동 필수'}</EmotionAnalysis>
+          <EmotionAnalysis>{partnerName ? '미션 수행중' : '연동 필수'}</EmotionAnalysis>
         </SpouseCard>
       </CoupleCardsWrapper>
 
@@ -212,6 +212,10 @@ const SpouseCard = styled.div`
   align-items: center;
   padding: 1rem;
   box-shadow: inset 0 0 0.3rem rgba(0, 0, 0, 0.1);
+
+  p {
+    color: ${variables.colors.secondaryStrong};
+  }
 `;
 const CardImage = styled.img`
   width: 11rem;
@@ -227,9 +231,10 @@ const CardName = styled.div`
   margin-bottom: 0.8rem;
 `;
 
-const EmotionAnalysis = styled.div`
+const EmotionAnalysis = styled.p`
   font-size: ${variables.size.medium};
   text-align: center;
+  font-weight: 600;
   color: ${variables.colors.primary};
 `;
 
