@@ -147,10 +147,10 @@ const ButtonWrapper = styled.div`
   gap: 1rem;
   position: fixed;
   bottom: 3rem;
-  left: ${variables.layoutPadding};
-  right: ${variables.layoutPadding};
-  width: auto;
-  max-width: calc(100% - 2 * ${variables.layoutPadding});
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - calc(${variables.layoutPadding}*2));
+  max-width: calc(500px - 2 * ${variables.layoutPadding});
   z-index: 1000;
 `;
 
