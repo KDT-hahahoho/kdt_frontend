@@ -120,11 +120,12 @@ const CoupleInformation = ({ coupleData }: OurReportProps) => {
   return (
     <CoupleInformationContainer>
       <CoupleInfoTitle>{selfMessage ? selfMessage : '원활한 사용을 위해 부부 연동이 필요해요!'}</CoupleInfoTitle>
+
       <CoupleCardsWrapper>
         <PersonalCard>
           <CardImage src={gender === 'M' ? profileImgMan : profileImgWomen} alt="User Image" />
           <CardName>{myName}</CardName>
-          <EmotionAnalysis>감정 분석 필요</EmotionAnalysis>
+          <EmotionAnalysis>미션 완료</EmotionAnalysis>
         </PersonalCard>
         <SpouseCard
           onClick={() => {
@@ -136,9 +137,14 @@ const CoupleInformation = ({ coupleData }: OurReportProps) => {
             alt="Spouse Image"
           />
           <CardName>{partnerName || '배우자 이름'}</CardName>
-          <EmotionAnalysis>{partnerName ? '감정분석 필요' : '연동 필수'}</EmotionAnalysis>
+          <EmotionAnalysis>{partnerName ? '미션 수행중' : '연동 필수'}</EmotionAnalysis>
         </SpouseCard>
       </CoupleCardsWrapper>
+
+      <CoupleMission>
+        {partnerName ? getMissionStatusMessage() : '배우자 연동을 하면 미션 등록이 가능해요'}
+      </CoupleMission>
+
       {mission && (
         <CoupleMissionToChoose isMissionDone={isMissionDone}>
           <MissionTitle>{mission}</MissionTitle>
@@ -147,9 +153,6 @@ const CoupleInformation = ({ coupleData }: OurReportProps) => {
         </CoupleMissionToChoose>
       )}
 
-      <CoupleMission>
-        {partnerName ? getMissionStatusMessage() : '배우자 연동을 하면 미션 등록이 가능해요'}
-      </CoupleMission>
       <CoupleMissionWeekly></CoupleMissionWeekly>
     </CoupleInformationContainer>
   );
@@ -209,6 +212,10 @@ const SpouseCard = styled.div`
   align-items: center;
   padding: 1rem;
   box-shadow: inset 0 0 0.3rem rgba(0, 0, 0, 0.1);
+
+  p {
+    color: ${variables.colors.secondaryStrong};
+  }
 `;
 const CardImage = styled.img`
   width: 11rem;
@@ -224,9 +231,10 @@ const CardName = styled.div`
   margin-bottom: 0.8rem;
 `;
 
-const EmotionAnalysis = styled.div`
+const EmotionAnalysis = styled.p`
   font-size: ${variables.size.medium};
   text-align: center;
+  font-weight: 600;
   color: ${variables.colors.primary};
 `;
 
@@ -238,10 +246,26 @@ const CoupleMission = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 0 0.3rem rgba(0, 0, 0, 0.1);
   border-radius: calc(${variables.borderRadius} + 0.4rem);
   color: ${variables.colors.black};
   margin-bottom: 1.4rem;
+  border: 1px solid ${variables.colors.secondaryStrong};
+  position: relative;
+  background: ${variables.colors.secondarySoft};
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 20%;
+    transform: translateY(-56%) rotate(-45deg) skew(-17deg, -17deg);
+    width: 2rem;
+    aspect-ratio: 1/1;
+    background: ${variables.colors.secondarySoft};
+    border-top: 1px solid ${variables.colors.secondaryStrong};
+    border-right: 1px solid ${variables.colors.secondaryStrong};
+  }
 `;
 
 const CoupleMissionToChoose = styled.div<{ isMissionDone: boolean }>`
@@ -251,13 +275,14 @@ const CoupleMissionToChoose = styled.div<{ isMissionDone: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: inset 0 0 0.3rem rgba(0, 0, 0, 0.1);
+  /* box-shadow: inset 0 0 0.3rem rgba(0, 0, 0, 0.1); */
   border-radius: calc(${variables.borderRadius} + 0.4rem);
   color: ${variables.colors.black};
   margin-bottom: 1.4rem;
   padding: 1.4rem 2.5rem;
   border: ${({ isMissionDone }) => (isMissionDone ? `1px solid ${variables.colors.primary}` : 'transparent')};
   border-color: ${({ isMissionDone }) => (isMissionDone ? variables.colors.primary : 'transparent')};
+  background: ${variables.colors.primaryLight};
 `;
 
 const MissionTitle = styled.p`
