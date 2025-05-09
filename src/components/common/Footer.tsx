@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import variables from '@styles/Variables';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Button from './Button';
 
 interface InfTest {
@@ -40,12 +40,12 @@ const Footer = ({ coupleData }: OurReportProps) => {
   return (
     <FooterContainer>
       <FooterNav>
-        <FooterItem>
-          <StyledLink to="/home">
-            <FooterIcon src="/img/footer-01.svg" alt="홈 아이콘" />홈
-          </StyledLink>
+        <FooterItem index={1}>
+          <NavLink to="/home" className="menu">
+            홈
+          </NavLink>
         </FooterItem>
-        <FooterItem>
+        <FooterItem index={2}>
           <StyledButton
             onClick={() => {
               if (hasDoneInfTest) {
@@ -54,12 +54,12 @@ const Footer = ({ coupleData }: OurReportProps) => {
                 setModal(true);
               }
             }}
+            className="menu"
           >
-            <FooterIcon src="/img/footer-02.svg" alt="감정기록 아이콘" />
             감정기록
           </StyledButton>
         </FooterItem>
-        <FooterItem>
+        <FooterItem index={3}>
           <StyledButton
             onClick={() => {
               if (hasDoneInfTest) {
@@ -68,16 +68,15 @@ const Footer = ({ coupleData }: OurReportProps) => {
                 setModal(true);
               }
             }}
+            className="menu"
           >
-            <FooterIcon src="/img/footer-04.svg" alt="심리 상담 아이콘" />
             AI 심리상담
           </StyledButton>
         </FooterItem>
-        <FooterItem>
-          <StyledLink to="/scale/list">
-            <FooterIcon src="/img/footer-03.svg" alt="척도검사 아이콘" />
+        <FooterItem index={4}>
+          <NavLink to="/scale/list" className="menu">
             척도검사
-          </StyledLink>
+          </NavLink>
         </FooterItem>
       </FooterNav>
 
@@ -108,9 +107,8 @@ const FooterContainer = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: ${variables.borderRadius}+ 2.2rem;
-  border-top-right-radius: ${variables.borderRadius}+ 2.2rem;
-  box-shadow: ${variables.BoxShadow};
+  border-radius: 2rem 2rem 0 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   @media (min-width: 500px) {
     width: 100%;
   }
@@ -124,37 +122,40 @@ const FooterNav = styled.ul`
   margin: 0;
 `;
 
-const FooterItem = styled.li`
+const FooterItem = styled.li<{ index: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  &:hover,
-  &:focus {
-    img {
-      filter: brightness(0.6) sepia(1) hue-rotate(200deg);
+  .menu {
+    text-decoration: none;
+    color: ${variables.colors.gray50};
+    font-size: 1.2rem;
+    transition: 0.3s all;
+    position: relative;
+    padding-top: 2.3rem;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2rem;
+      aspect-ratio: 1/1;
+      background: ${({ index }) => `url(/img/footer-0${index}.svg) no-repeat center / 100%`};
+      transition: all 0.3s;
     }
   }
-`;
 
-const FooterIcon = styled.img`
-  width: 2rem;
-  aspect-ratio: 1/1;
-  transition: filter 0.3s ease;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${variables.colors.gray50};
-  font-size: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-
-  &:focus {
+  &:hover .menu,
+  .menu[aria-current='page'] {
     color: ${variables.colors.primaryStrong};
-    font-weight: bold;
+
+    &::before {
+      background-image: ${({ index }) => `url(/img/footer-0${index}-act.svg)`};
+    }
   }
 `;
 

@@ -1,7 +1,7 @@
 import variables from '@styles/Variables';
 import React, { useState } from 'react';
 import ECharts from 'echarts-for-react';
-import useAnalysisStore from '@store/useAnalysisStore';
+// import useAnalysisStore from '@store/useAnalysisStore';
 import styled from '@emotion/styled';
 
 const EmotionStressBefore = ({
@@ -13,7 +13,7 @@ const EmotionStressBefore = ({
   color?: string;
   text?: string;
 }) => {
-  const analysisResult = useAnalysisStore((state) => state.analysis);
+  // const analysisResult = useAnalysisStore((state) => state.analysis);
   const value = total * 0.5;
 
   // console.log(analysisResult);
@@ -84,7 +84,7 @@ const EmotionStressBefore = ({
   return (
     <StressText className="xxx">
       <div className="stress-box">
-        <ECharts option={options} opts={{ width: 170, height: 170 }} />
+        <ECharts option={options} opts={{ width: 'auto', height: 170 }} />
       </div>
       <p className="stress-sub-text">{text}</p>
     </StressText>

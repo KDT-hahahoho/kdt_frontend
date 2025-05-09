@@ -3,7 +3,7 @@ export const emotionMissionsRes = {
     SUN: [],
     MON: [
       {
-        is_complement: false,
+        is_complement: true,
         created_at: '2024-11-18, MON',
       },
     ],
@@ -33,7 +33,12 @@ export const emotionMissionsRes = {
     ],
     TUE: [],
     WED: [],
-    THU: [],
+    THU: [
+      {
+        is_complement: true,
+        created_at: '2024-11-18, MON',
+      },
+    ],
     FRI: [],
     SAT: [],
   },
